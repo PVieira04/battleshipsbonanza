@@ -52,6 +52,10 @@ class Game:
             print(f'Invalid input. The second character must be a number between 1 and 6.')
             return False
 
+        if (stripped_bomb[1] < 1 or stripped_bomb[1] > 6):
+            print(f'Invalid input. The second character must be a number between 1 and 6.')
+            return False
+
         # I could also check to see if the user has already deployed a bomb at that location but that's a skill issue imo.
         
         else:
@@ -59,6 +63,7 @@ class Game:
 
     def handle_bomb_deployment():
         # Logic to update comp game board.
+        
         return
     
     def check_if_user_wins():
