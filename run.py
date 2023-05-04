@@ -5,8 +5,9 @@
 class Game:
     def run_game():
         # Initialise the game.
-        Board.generate_user_board()
-        Board.generate_comp_board()
+        user = Board("user")
+        user.print_board()
+        comp = Board("comp")
         Game.main_game_loop()
         return
 
@@ -23,6 +24,7 @@ class Game:
             if (Game.validate_bomb_deployment(bomb_location)):
                 print(f'Approved. The bomb will now be deployed.')
                 # Go to handle_bomb_deployment.
+                handle_bomb_deployment()
                 return
             else:
                 print("Please try again.")
@@ -77,8 +79,11 @@ class Game:
 
 class Board:
 
+    def __init__(self, name):
+        self.name = name
+
     board = [
-        [" ", " ", " ", " ", " ", " "],
+        ["*", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
@@ -98,10 +103,10 @@ class Board:
         Board.print_board(Board.comp_board)
         return
 
-    def print_board(board):
+    def print_board(self):
         print("  A B C D E F")
         row_num = 1
-        for line in board:
+        for line in self.board:
             print(str(row_num) + " " + " ".join(line))
             row_num += 1
 
