@@ -17,9 +17,43 @@ class Game:
     
     def ask_user_to_deploy_bombs():
         # Ask user for input.
-        bomb_location = input("Type where you would like to place your bomb (e.g. A1): ")
-        print(bomb_location)
-        return
+        while (True):
+            bomb_location = input("Type where you would like to place your bomb (e.g. A1): ")
+            print(bomb_location)
+            if (Game.validate_bomb_deployment(bomb_location)):
+                print(f'Approved. The bomb will now be deployed.')
+                # Go to handle_bomb_deployment.
+                return
+            else:
+                print("Please try again.")
+                print("")
+    
+    def validate_bomb_deployment(bomb):
+        stripped_bomb = bomb.replace(" ", "")
+        print(f'original input: {bomb}')
+        print(f"stripped input: {stripped_bomb}")
+
+        if (len(stripped_bomb) != 2):
+            print(f'Invalid input. String must be 2 characters long.')
+            return False
+
+        if (stripped_bomb[0].isalpha() == False):
+            print(f'Invalid input. The first character must be a letter ranging from A to F.')
+            return False
+
+        s = stripped_bomb[0].upper()
+        if (s != 'A' or s != 'B' or s != 'C' or s != 'D' or s != 'E' or s != 'F'):
+            print(f'Invalid input. The first character must be a letter ranging from A to F.')
+            return False
+
+        if (stripped_bomb[1].isnumeric() == False):
+            print(f'Invalid input. The second character must be a number between 1 and 6.')
+            return False
+
+        # I could also check to see if the user has already deployed a bomb at that location but that's a skill issue imo.
+        
+        else:
+            return True
 
     def handle_bomb_deployment():
         # Logic to update comp game board.
@@ -43,21 +77,12 @@ class Game:
 
 class Board:
 
-    user_board = [
-        ["*", " ", " ", " ", " ", "*"],
+    board = [
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
-        ["*", " ", " ", " ", " ", "*"]
-    ]
-
-    comp_board = [
-        [" ", " ", " ", " ", "*", " "],
         [" ", " ", " ", " ", " ", " "],
-        [" ", "*", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        ["*", " ", " ", "*", " ", " "],
         [" ", " ", " ", " ", " ", " "]
     ]
 
