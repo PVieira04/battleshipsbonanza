@@ -109,10 +109,22 @@ class Game:
 
     def check_if_comp_wins(user, comp):
         # Check if comp wins the game.
+        if (comp.check_win_condition()):
+            Game.ask_if_user_wishes_to_play_again(user, comp)
+        else:
+            Game.ask_user_to_deploy_bombs(user, comp)
         return
     
     def ask_if_user_wishes_to_play_again(user, comp):
         # Ask user if they wish to play the game again.
+        while True:
+            play_again = input("Would you like to play again? (y/n): ")
+            if (play_again == "y"):
+                Game.run_game()
+            elif (play_again == "n"):
+                return
+            else:
+                print("Invalid input, please try again.")
         return
 
 class Board:
