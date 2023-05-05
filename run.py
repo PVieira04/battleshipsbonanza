@@ -8,15 +8,15 @@ class Game:
         user = Board("user")
         user.print_board()
         comp = Board("comp")
-        Game.main_game_loop()
+        Game.main_game_loop(user, comp)
         return
 
-    def main_game_loop():
+    def main_game_loop(user, comp):
         # The main game loop runs here. Only exits with winning condition.
-        Game.ask_user_to_deploy_bombs()
+        Game.ask_user_to_deploy_bombs(user, comp)
         return
     
-    def ask_user_to_deploy_bombs():
+    def ask_user_to_deploy_bombs(user, comp):
         # Ask user for input.
         while (True):
             bomb_location = input("Type where you would like to place your bomb (e.g. A1): ")
@@ -25,7 +25,7 @@ class Game:
             if (Game.validate_bomb_deployment(stripped_bomb)):
                 print(f'Approved. The bomb will now be deployed.')
                 # Go to handle_bomb_deployment.
-                Game.handle_bomb_deployment(stripped_bomb)
+                Game.handle_bomb_deployment(user, stripped_bomb)
                 return
             else:
                 print("Please try again.")
@@ -59,7 +59,7 @@ class Game:
         else:
             return True
 
-    def handle_bomb_deployment(bomb):
+    def handle_bomb_deployment(user, bomb):
         # Logic to update comp game board.
         if (bomb[0] == "A" or bomb[0] == "a"):
             i = 0
@@ -75,6 +75,7 @@ class Game:
             i = 5
         j = int(bomb[1]) - 1
         print(f'The co-ordinates of deployment are: ({i}, {j})')
+        user.update_game_board(i, j)
         return
     
     def check_if_user_wins():
@@ -125,5 +126,22 @@ class Board:
         for line in self.board:
             print(str(row_num) + " " + " ".join(line))
             row_num += 1
+    
+    def update_game_board(self, i, j):
+        if (self.board[j][i] == "X"):
+            print("This cell has already been hit by a bomb.")
+            return
+        elif (self.board[j][i] == " "):
+            print("You missed.")
+        elif (self.board[j][i] == "*"):
+            print("It's a hit!")
+        self.board[j][i] = "X"
+        return
+    
+    def check_win_condition(self):
+        if ("*" in [item for sublist in self.board for item in sublist]):
+            print("There is more fu nto be had!")
+        else:
+            print(f'Game Over! {self.name} wins!!')
 
 Game.run_game()
