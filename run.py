@@ -3,6 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 import random
+import sys
 
 class Game:
     def run_game():
@@ -16,8 +17,14 @@ class Game:
 
     def main_game_loop(user, comp):
         # The main game loop runs here. Only exits with winning condition.
-        Game.ask_user_to_deploy_bombs(user, comp)
-        return
+        while True:
+            bomb = Game.ask_user_to_deploy_bombs(user, comp)
+            Game.handle_bomb_deployment(user, comp, bomb)
+            if (user.check_win_condition()):
+                Game.ask_if_user_wishes_to_play_again(user, comp)
+            Game.comp_makes_a_move(user, comp)
+            if (comp.check_win_condition()):
+                Game.ask_if_user_wishes_to_play_again(user, comp)
     
     def ask_user_to_deploy_bombs(user, comp):
         # Ask user for input.
@@ -28,8 +35,7 @@ class Game:
             if (Game.validate_bomb_deployment(stripped_bomb)):
                 print(f'Approved. The bomb will now be deployed.')
                 # Go to handle_bomb_deployment.
-                Game.handle_bomb_deployment(user, comp, stripped_bomb)
-                return
+                return stripped_bomb
             else:
                 print("Please try again.")
                 print("")
@@ -79,15 +85,6 @@ class Game:
         j = int(bomb[1]) - 1
         print(f'The co-ordinates of deployment are: ({i}, {j})')
         user.update_game_board(i, j)
-        Game.check_if_user_wins(user, comp)
-        return
-    
-    def check_if_user_wins(user, comp):
-        # Check if user wins the game.
-        if (user.check_win_condition()):
-            Game.ask_if_user_wishes_to_play_again(user, comp)
-        else:
-            Game.comp_makes_a_move(user, comp)
         return
 
     def comp_makes_a_move(user, comp):
@@ -105,27 +102,25 @@ class Game:
             else:
                 print("Computer bomb landed in water.")
             comp.board[j][i] = "X"
-            Game.check_if_comp_wins(user, comp)
-
-    def check_if_comp_wins(user, comp):
-        # Check if comp wins the game.
-        if (comp.check_win_condition()):
-            Game.ask_if_user_wishes_to_play_again(user, comp)
-        else:
-            Game.ask_user_to_deploy_bombs(user, comp)
-        return
+            return
     
     def ask_if_user_wishes_to_play_again(user, comp):
         # Ask user if they wish to play the game again.
         while True:
             play_again = input("Would you like to play again? (y/n): ")
             if (play_again == "y"):
+                user.generate_game_board()
+                comp.generate_game_board()
                 Game.run_game()
             elif (play_again == "n"):
-                return
+                print("I hope you had fun playing!")
+                print("Now closing program...")
+                sys.exit()
             else:
                 print("Invalid input, please try again.")
         return
+    
+
 
 class Board:
 
@@ -136,22 +131,20 @@ class Board:
         ["*", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
+        [" ", "*", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "]
     ]
 
-    def generate_user_board():
-        # Create the board here.
-        print("User Board:")
-        Board.print_board(Board.user_board)
-        return
-    
-    def generate_comp_board():
-        # Create the board here.
-        print("Computer Board:")
-        Board.print_board(Board.comp_board)
-        return
+    def generate_game_board(self):
+        self.board = [
+        ["*", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
+        [" ", "*", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "]
+    ]
 
     def print_board(self):
         print("  A B C D E F")
