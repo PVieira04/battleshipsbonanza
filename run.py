@@ -2,12 +2,15 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
+import random
+
 class Game:
     def run_game():
         # Initialise the game.
         user = Board("user")
         user.print_board()
         comp = Board("comp")
+        comp.print_board()
         Game.main_game_loop(user, comp)
         return
 
@@ -25,7 +28,7 @@ class Game:
             if (Game.validate_bomb_deployment(stripped_bomb)):
                 print(f'Approved. The bomb will now be deployed.')
                 # Go to handle_bomb_deployment.
-                Game.handle_bomb_deployment(user, stripped_bomb)
+                Game.handle_bomb_deployment(user, comp, stripped_bomb)
                 return
             else:
                 print("Please try again.")
@@ -59,7 +62,7 @@ class Game:
         else:
             return True
 
-    def handle_bomb_deployment(user, bomb):
+    def handle_bomb_deployment(user, comp, bomb):
         # Logic to update comp game board.
         if (bomb[0] == "A" or bomb[0] == "a"):
             i = 0
@@ -76,21 +79,39 @@ class Game:
         j = int(bomb[1]) - 1
         print(f'The co-ordinates of deployment are: ({i}, {j})')
         user.update_game_board(i, j)
+        Game.check_if_user_wins(user, comp)
         return
     
-    def check_if_user_wins():
+    def check_if_user_wins(user, comp):
         # Check if user wins the game.
+        if (user.check_win_condition()):
+            Game.ask_if_user_wishes_to_play_again(user, comp)
+        else:
+            Game.comp_makes_a_move(user, comp)
         return
 
-    def comp_makes_a_move():
+    def comp_makes_a_move(user, comp):
         # Computer to do a move.
-        return
+        print("The computer will now make their move.")
+        while True:
+            i = random.randint(0, 5)
+            j = random.randint(0, 5)
+            if (comp.board[j][i] == "X"):
+                continue
+            else:
+                print(f'Computer deploying bomb at ({i}, {j})')
+            if (comp.board[j][i] == "*"):
+                print("It's a hit!")
+            else:
+                print("Computer bomb landed in water.")
+            comp.board[j][i] = "X"
+            Game.check_if_comp_wins(user, comp)
 
-    def check_if_comp_wins():
+    def check_if_comp_wins(user, comp):
         # Check if comp wins the game.
         return
     
-    def ask_if_user_wishes_to_play_again():
+    def ask_if_user_wishes_to_play_again(user, comp):
         # Ask user if they wish to play the game again.
         return
 
@@ -102,7 +123,7 @@ class Board:
     board = [
         ["*", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
-        [" ", "*", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "]
@@ -140,8 +161,10 @@ class Board:
     
     def check_win_condition(self):
         if ("*" in [item for sublist in self.board for item in sublist]):
-            print("There is more fu nto be had!")
+            print("There is still more fun to be had.")
+            return False
         else:
             print(f'Game Over! {self.name} wins!!')
+            return True
 
 Game.run_game()
