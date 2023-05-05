@@ -21,38 +21,36 @@ class Game:
         while (True):
             bomb_location = input("Type where you would like to place your bomb (e.g. A1): ")
             print(bomb_location)
-            if (Game.validate_bomb_deployment(bomb_location)):
+            stripped_bomb = bomb_location.replace(" ", "")
+            if (Game.validate_bomb_deployment(stripped_bomb)):
                 print(f'Approved. The bomb will now be deployed.')
                 # Go to handle_bomb_deployment.
-                handle_bomb_deployment()
+                Game.handle_bomb_deployment(stripped_bomb)
                 return
             else:
                 print("Please try again.")
                 print("")
     
     def validate_bomb_deployment(bomb):
-        stripped_bomb = bomb.replace(" ", "")
-        print(f'original input: {bomb}')
-        print(f"stripped input: {stripped_bomb}")
-
-        if (len(stripped_bomb) != 2):
+        if (len(bomb) != 2):
             print(f'Invalid input. String must be 2 characters long.')
             return False
 
-        if (stripped_bomb[0].isalpha() == False):
+        if (bomb[0].isalpha() == False):
             print(f'Invalid input. The first character must be a letter ranging from A to F.')
             return False
 
-        s = stripped_bomb[0].upper()
-        if (s != 'A' or s != 'B' or s != 'C' or s != 'D' or s != 'E' or s != 'F'):
+        s = bomb[0].upper()
+        print(f'variable "s" is {s}')
+        if (s != 'A' and s != 'B' and s != 'C' and s != 'D' and s != 'E' and s != 'F'):
             print(f'Invalid input. The first character must be a letter ranging from A to F.')
             return False
 
-        if (stripped_bomb[1].isnumeric() == False):
+        if (bomb[1].isnumeric() == False):
             print(f'Invalid input. The second character must be a number between 1 and 6.')
             return False
 
-        if (stripped_bomb[1] < 1 or stripped_bomb[1] > 6):
+        if (int(bomb[1]) < 1 or int(bomb[1]) > 6):
             print(f'Invalid input. The second character must be a number between 1 and 6.')
             return False
 
@@ -61,9 +59,22 @@ class Game:
         else:
             return True
 
-    def handle_bomb_deployment():
+    def handle_bomb_deployment(bomb):
         # Logic to update comp game board.
-        
+        if (bomb[0] == "A" or bomb[0] == "a"):
+            i = 0
+        if (bomb[0] == "B" or bomb[0] == "b"):
+            i = 1
+        if (bomb[0] == "C" or bomb[0] == "c"):
+            i = 2
+        if (bomb[0] == "D" or bomb[0] == "d"):
+            i = 3
+        if (bomb[0] == "E" or bomb[0] == "e"):
+            i = 4
+        if (bomb[0] == "F" or bomb[0] == "f"):
+            i = 5
+        j = int(bomb[1]) - 1
+        print(f'The co-ordinates of deployment are: ({i}, {j})')
         return
     
     def check_if_user_wins():
@@ -90,7 +101,7 @@ class Board:
     board = [
         ["*", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
+        [" ", "*", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "]
