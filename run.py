@@ -137,14 +137,23 @@ class Board:
     ]
 
     def generate_game_board(self):
-        self.board = [
-        ["*", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", "*", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "]
-    ]
+        # Section to come up with locations
+        locations = []
+        while (len(locations) < 6):
+            i = random.randint(0, 5)
+            j = random.randint(0, 5)
+            if ([i, j] in locations):
+                continue
+            else:
+                locations.append([i, j])
+        print(locations)
+        # Section to assign ships
+        for j, sub_array in enumerate(self.board):
+            for i, element in enumerate(sub_array):
+                if ([i, j] in locations):
+                    self.board[j][i] = "*"
+                else:
+                    self.board[j][i] = " "
 
     def print_board(self):
         print("  A B C D E F")
