@@ -8,9 +8,9 @@ import sys
 class Game:
     def run_game():
         # Initialise the game.
-        user = Board("user")
+        user = Player("user")
         user.print_board()
-        comp = Board("comp")
+        comp = Player("comp")
         comp.print_board()
         Game.main_game_loop(user, comp)
         return
@@ -25,8 +25,10 @@ class Game:
             Game.comp_makes_a_move(user, comp)
             if (comp.check_win_condition()):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
+            user.print_board()
+            comp.print_board()
     
-    def ask_user_to_deploy_bombs(user, comp):
+    def ask_user_to_deploy_bombs():
         # Ask user for input.
         while (True):
             bomb_location = input("Type where you would like to place your bomb (e.g. A1): ")
@@ -75,7 +77,7 @@ class Game:
         if (bomb[0] == "B" or bomb[0] == "b"):
             i = 1
         if (bomb[0] == "C" or bomb[0] == "c"):
-            i = 2
+            i = 24
         if (bomb[0] == "D" or bomb[0] == "d"):
             i = 3
         if (bomb[0] == "E" or bomb[0] == "e"):
@@ -122,7 +124,7 @@ class Game:
     
 
 
-class Board:
+class Player:
 
     def __init__(self, name):
         self.name = name
@@ -132,6 +134,15 @@ class Board:
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", "*", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "]
+    ]
+
+    deployments = [
+        [" ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " "]
     ]
