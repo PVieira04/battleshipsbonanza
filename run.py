@@ -77,18 +77,7 @@ class Game:
 
     def handle_bomb_deployment(user, comp, bomb):
         # Logic to update comp game board.
-        if (bomb[0] == "A" or bomb[0] == "a"):
-            i = 0
-        if (bomb[0] == "B" or bomb[0] == "b"):
-            i = 1
-        if (bomb[0] == "C" or bomb[0] == "c"):
-            i = 2
-        if (bomb[0] == "D" or bomb[0] == "d"):
-            i = 3
-        if (bomb[0] == "E" or bomb[0] == "e"):
-            i = 4
-        if (bomb[0] == "F" or bomb[0] == "f"):
-            i = 5
+        i = ord(bomb[0].upper()) - 65
         j = int(bomb[1]) - 1
         print(f'The co-ordinates of deployment are: ({i}, {j})')
         user.update_game_board(i, j)
