@@ -128,7 +128,7 @@ class Player:
         ]
         self.deployments = [
             [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", "X", " ", " "],
             [" ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " "],
@@ -155,11 +155,13 @@ class Player:
                     self.board[j][i] = " "
 
     def print_board(self):
-        print("  A B C D E F")
-        row_num = 1
-        for line in self.board:
-            print(str(row_num) + " " + " ".join(line))
-            row_num += 1
+        print("")
+        print(f"{self.name}'s board:          {self.name}'s deployments:")
+        print("")
+        print("  A B C D E F            A B C D E F")
+        for i, row in enumerate(self.board):
+            print(f"{str(i + 1)} {' '.join(row)}          {str(i + 1)} {' '.join(self.deployments[i])}")
+        print("")
     
     def update_game_board(self, i, j):
         if (self.board[j][i] == "X"):
