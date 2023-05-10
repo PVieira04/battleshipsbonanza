@@ -165,15 +165,16 @@ class Player:
         print("")
     
     def update_game_board(self, other, i, j):
-        if (other.deployments[j][i] == "X"):
+        if (other.board[j][i] == "X" or other.board[j][i] == "O"):
             print("You have already deployed a bomb at this location")
             return
         elif (other.board[j][i] == " "):
             print("You missed.")
+            other.board[j][i] = "X"
         elif (other.board[j][i] == "*"):
             print("It's a hit!")
-        self.deployments[j][i] = "X"
-        other.board[j][i] = "X"
+            other.board[j][i] = "O"
+        self.deployments[j][i] = other.board[j][i]
         return
     
     def check_win_condition(self):
