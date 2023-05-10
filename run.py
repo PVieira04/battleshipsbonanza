@@ -9,16 +9,21 @@ class Game:
     def run_game():
         # Initialise the game.
         user = Player("user")
-        user.print_board()
         comp = Player("comp")
+        Game.set_game_boards(user, comp)
+        return
+
+    def set_game_boards(user, comp):
+        user.generate_game_board()
+        comp.generate_game_board()
+        user.print_board()
         comp.print_board()
         Game.main_game_loop(user, comp)
-        return
 
     def main_game_loop(user, comp):
         # The main game loop runs here. Only exits with winning condition.
         while True:
-            bomb = Game.ask_user_to_deploy_bombs(user, comp)
+            bomb = Game.ask_user_to_deploy_bombs()
             Game.handle_bomb_deployment(user, comp, bomb)
             if (user.check_win_condition()):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
@@ -77,7 +82,7 @@ class Game:
         if (bomb[0] == "B" or bomb[0] == "b"):
             i = 1
         if (bomb[0] == "C" or bomb[0] == "c"):
-            i = 24
+            i = 2
         if (bomb[0] == "D" or bomb[0] == "d"):
             i = 3
         if (bomb[0] == "E" or bomb[0] == "e"):
@@ -111,9 +116,7 @@ class Game:
         while True:
             play_again = input("Would you like to play again? (y/n): ")
             if (play_again == "y"):
-                user.generate_game_board()
-                comp.generate_game_board()
-                Game.run_game()
+                Game.set_game_boards(user, comp)
             elif (play_again == "n"):
                 print("I hope you had fun playing!")
                 print("Now closing program...")
@@ -128,24 +131,22 @@ class Player:
 
     def __init__(self, name):
         self.name = name
-
-    board = [
-        ["*", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", "*", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "]
-    ]
-
-    deployments = [
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " "]
-    ]
+        self.board = [
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "]
+        ]
+        self.deployments = [
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " "]
+        ]
 
     def generate_game_board(self):
         # Section to come up with locations
