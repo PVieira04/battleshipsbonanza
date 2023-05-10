@@ -79,7 +79,7 @@ class Game:
         i = ord(bomb[0].upper()) - 65
         j = int(bomb[1]) - 1
         print(f'The co-ordinates of deployment are: ({i}, {j})')
-        user.update_game_board(i, j)
+        user.update_game_board(comp, i, j)
         return
 
     def comp_makes_a_move(user, comp):
@@ -129,7 +129,7 @@ class Player:
         ]
         self.deployments = [
             [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", "X", " ", " "],
+            [" ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " "],
@@ -164,15 +164,16 @@ class Player:
             print(f"{str(i + 1)} {' '.join(row)}          {str(i + 1)} {' '.join(self.deployments[i])}")
         print("")
     
-    def update_game_board(self, i, j):
-        if (self.board[j][i] == "X"):
-            print("This cell has already been hit by a bomb.")
+    def update_game_board(self, other, i, j):
+        if (other.deployments[j][i] == "X"):
+            print("You have already deployed a bomb at this location")
             return
-        elif (self.board[j][i] == " "):
+        elif (other.board[j][i] == " "):
             print("You missed.")
-        elif (self.board[j][i] == "*"):
+        elif (other.board[j][i] == "*"):
             print("It's a hit!")
-        self.board[j][i] = "X"
+        self.deployments[j][i] = "X"
+        other.board[j][i] = "X"
         return
     
     def check_win_condition(self):
