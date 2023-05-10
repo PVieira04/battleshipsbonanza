@@ -24,10 +24,10 @@ class Game:
             Game.display_game_boards(user, comp)
             bomb = Game.ask_user_to_deploy_bombs()
             Game.handle_bomb_deployment(user, comp, bomb)
-            if (user.check_win_condition()):
+            if (user.check_win_condition(comp)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
             Game.comp_makes_a_move(user, comp)
-            if (comp.check_win_condition()):
+            if (comp.check_win_condition(user)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
 
     def display_game_boards(user, comp):
@@ -85,19 +85,9 @@ class Game:
     def comp_makes_a_move(user, comp):
         # Computer to do a move.
         print("The computer will now make their move.")
-        while True:
-            i = random.randint(0, 5)
-            j = random.randint(0, 5)
-            if (comp.board[j][i] == "X"):
-                continue
-            else:
-                print(f'Computer deploying bomb at ({i}, {j})')
-            if (comp.board[j][i] == "*"):
-                print("It's a hit!")
-            else:
-                print("Computer bomb landed in water.")
-            comp.board[j][i] = "X"
-            return
+        computer_move = comp.random_move()
+        comp.update_game_board(user, computer_move[0], computer_move[1])
+        return
     
     def ask_if_user_wishes_to_play_again(user, comp):
         # Ask user if they wish to play the game again.
@@ -177,8 +167,18 @@ class Player:
         self.deployments[j][i] = other.board[j][i]
         return
     
-    def check_win_condition(self):
-        if ("*" in [item for sublist in self.board for item in sublist]):
+    def random_move(self):
+        while True:
+            i = random.randint(0, 5)
+            j = random.randint(0, 5)
+            if (self.deployments[j][i] == "X" or self.board[j][i] == "O"):
+                continue
+            else:
+                computer_move = [i, j]
+                return computer_move
+    
+    def check_win_condition(self, other):
+        if ("*" in [item for sublist in other.board for item in sublist]):
             print("There is still more fun to be had.")
             return False
         else:
