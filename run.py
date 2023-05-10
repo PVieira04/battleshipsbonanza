@@ -16,13 +16,12 @@ class Game:
     def set_game_boards(user, comp):
         user.generate_game_board()
         comp.generate_game_board()
-        user.print_board()
-        comp.print_board()
         Game.main_game_loop(user, comp)
 
     def main_game_loop(user, comp):
         # The main game loop runs here. Only exits with winning condition.
         while True:
+            Game.display_game_boards(user, comp)
             bomb = Game.ask_user_to_deploy_bombs()
             Game.handle_bomb_deployment(user, comp, bomb)
             if (user.check_win_condition()):
@@ -30,8 +29,10 @@ class Game:
             Game.comp_makes_a_move(user, comp)
             if (comp.check_win_condition()):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
-            user.print_board()
-            comp.print_board()
+
+    def display_game_boards(user, comp):
+        user.print_board()
+        comp.print_board()
     
     def ask_user_to_deploy_bombs():
         # Ask user for input.
