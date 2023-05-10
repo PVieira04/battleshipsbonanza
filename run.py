@@ -56,9 +56,7 @@ class Game:
             print(f'Invalid input. The first character must be a letter ranging from A to F.')
             return False
 
-        s = bomb[0].upper()
-        print(f'variable "s" is {s}')
-        if (s != 'A' and s != 'B' and s != 'C' and s != 'D' and s != 'E' and s != 'F'):
+        if (ord(bomb[0].upper()) < 65 or ord(bomb[0].upper()) > 70):
             print(f'Invalid input. The first character must be a letter ranging from A to F.')
             return False
 
