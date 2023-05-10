@@ -8,8 +8,8 @@ import sys
 class Game:
     def run_game():
         # Initialise the game.
-        user = Player("user")
-        comp = Player("comp")
+        user = Player("User")
+        comp = Player("Computer")
         Game.set_game_boards(user, comp)
         return
 
@@ -38,10 +38,8 @@ class Game:
         # Ask user for input.
         while (True):
             bomb_location = input("Type where you would like to place your bomb (e.g. A1): ")
-            print(bomb_location)
             stripped_bomb = bomb_location.replace(" ", "")
             if (Game.validate_bomb_deployment(stripped_bomb)):
-                print(f'Approved. The bomb will now be deployed.')
                 # Go to handle_bomb_deployment.
                 return stripped_bomb
             else:
@@ -76,16 +74,16 @@ class Game:
 
     def handle_bomb_deployment(user, comp, bomb):
         # Logic to update comp game board.
+        print(f"Approved. The bomb will now be deployed at {bomb[0].upper()}{bomb[1]}.")
         i = ord(bomb[0].upper()) - 65
         j = int(bomb[1]) - 1
-        print(f'The co-ordinates of deployment are: ({i}, {j})')
         user.update_game_board(comp, i, j)
         return
 
     def comp_makes_a_move(user, comp):
         # Computer to do a move.
-        print("The computer will now make their move.")
         computer_move = comp.random_move()
+        print(f"Computer deploying at {chr(computer_move[0]+65)}{computer_move[1] + 1}.")
         comp.update_game_board(user, computer_move[0], computer_move[1])
         return
     
@@ -94,6 +92,9 @@ class Game:
         while True:
             play_again = input("Would you like to play again? (y/n): ")
             if (play_again == "y"):
+                print("")
+                print("New Game!")
+                print("")
                 Game.set_game_boards(user, comp)
             elif (play_again == "n"):
                 print("I hope you had fun playing!")
@@ -106,7 +107,6 @@ class Game:
 
 
 class Player:
-
     def __init__(self, name):
         self.name = name
         self.board = [
@@ -140,7 +140,6 @@ class Player:
                 continue
             else:
                 locations.append([i, j])
-        print(locations)
         # Section to assign ships
         for j, sub_array in enumerate(self.board):
             for i, element in enumerate(sub_array):
@@ -151,7 +150,7 @@ class Player:
 
     def print_board(self):
         print("")
-        print(f"{self.name}'s board:          {self.name}'s deployments:")
+        print(f"{self.name}'s board:      {self.name}'s deployments:")
         print("")
         print("  A B C D E F            A B C D E F")
         for i, row in enumerate(self.board):
@@ -160,14 +159,16 @@ class Player:
     
     def update_game_board(self, other, i, j):
         if (other.board[j][i] == "X" or other.board[j][i] == "O"):
-            print("You have already deployed a bomb at this location")
+            print(f"{self.name} has already deployed a bomb at this location")
+            print("")
             return
         elif (other.board[j][i] == " "):
-            print("You missed.")
+            print(f"{self.name} missed.")
             other.board[j][i] = "X"
         elif (other.board[j][i] == "*"):
             print("It's a hit!")
             other.board[j][i] = "O"
+        print("")
         self.deployments[j][i] = other.board[j][i]
         return
     
@@ -183,9 +184,10 @@ class Player:
     
     def check_win_condition(self, other):
         if ("*" in [item for sublist in other.board for item in sublist]):
-            print("There is still more fun to be had.")
             return False
         else:
+            self.print_board()
+            other.print_board()
             print(f'Game Over! {self.name} wins!!')
             return True
 
