@@ -14,8 +14,8 @@ class Game:
         return
 
     def set_game_boards(user, comp):
-        user.generate_game_board()
-        comp.generate_game_board()
+        user.initialise_player()
+        comp.initialise_player()
         Game.main_game_loop(user, comp)
 
     def main_game_loop(user, comp):
@@ -117,14 +117,18 @@ class Player:
             [" ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " "]
         ]
+    
+    def initialise_player(self):       
         self.deployments = [
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "]
-        ]
+                [" ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " "],
+                [" ", " ", " ", " ", " ", " "]
+            ]
+        
+        self.generate_game_board()
 
     def generate_game_board(self):
         # Section to come up with locations
@@ -171,7 +175,7 @@ class Player:
         while True:
             i = random.randint(0, 5)
             j = random.randint(0, 5)
-            if (self.deployments[j][i] == "X" or self.board[j][i] == "O"):
+            if (self.deployments[j][i] == "X" or self.deployments[j][i] == "O"):
                 continue
             else:
                 computer_move = [i, j]
