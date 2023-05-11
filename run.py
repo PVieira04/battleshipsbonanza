@@ -42,8 +42,8 @@ class Game:
         return
 
     def set_game_boards(user, comp):
-        user.initialise_player()
-        comp.initialise_player()
+        user.generate_game_board()
+        comp.generate_game_board()
         Game.main_game_loop(user, comp)
 
     def main_game_loop(user, comp):
@@ -54,11 +54,11 @@ class Game:
             Game.handle_bomb_deployment(user, comp, bomb)
             if (user.check_win_condition(comp)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
-            time.sleep(2)
+            #time.sleep(2)
             Game.comp_makes_a_move(user, comp)
             if (comp.check_win_condition(user)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
-            time.sleep(2)
+            #time.sleep(2)
 
     def display_game_boards(user, comp):
         user.print_board()
@@ -125,7 +125,9 @@ class Game:
                 print("")
                 print("New Game!")
                 print("")
-                Game.set_game_boards(user, comp)
+                del user
+                del comp
+                Game.run_game()
             elif (play_again == "n"):
                 print("I hope you had fun playing!")
                 print("Now closing program...")
@@ -144,10 +146,6 @@ class Player:
     
     def set_board_size(self, size):
         return [[' ' for _ in range(size)] for _ in range(size)]
-
-    def initialise_player(self):       
-        
-        self.generate_game_board()
 
     def generate_game_board(self):
         # Section to come up with locations
