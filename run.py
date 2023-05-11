@@ -35,8 +35,9 @@ class Game:
     """
     def run_game():
         # Initialise the game.
-        user = Player("User", 6)
-        comp = Player("Computer", 6)
+        size = 4
+        user = Player("User", size)
+        comp = Player("Computer", size)
         Game.set_game_boards(user, comp)
         return
 
@@ -61,7 +62,7 @@ class Game:
 
     def display_game_boards(user, comp):
         user.print_board()
-        #comp.print_board()
+        comp.print_board()
     
     def ask_user_to_deploy_bombs(user):
         # Ask user for input.
@@ -139,20 +140,12 @@ class Player:
     def __init__(self, name, size):
         self.name = name
         self.board = self.set_board_size(size) 
-        self.deployments = self.board
+        self.deployments = self.set_board_size(size)
     
     def set_board_size(self, size):
         return [[' ' for _ in range(size)] for _ in range(size)]
 
     def initialise_player(self):       
-        self.deployments = [
-                [" ", " ", " ", " ", " ", " "],
-                [" ", " ", " ", " ", " ", " "],
-                [" ", " ", " ", " ", " ", " "],
-                [" ", " ", " ", " ", " ", " "],
-                [" ", " ", " ", " ", " ", " "],
-                [" ", " ", " ", " ", " ", " "]
-            ]
         
         self.generate_game_board()
 
@@ -178,11 +171,18 @@ class Player:
         print("")
         print(f"{self.name}'s board:      {self.name}'s deployments:")
         print("")
-        print("  A B C D E F            A B C D E F")
+        print(f"  {self.print_column_headers()}            {self.print_column_headers()}")
         for i, row in enumerate(self.board):
             print(f"{str(i + 1)} {' '.join(row)}          {str(i + 1)} {' '.join(self.deployments[i])}")
         print("")
     
+    def print_column_headers(self):
+        string = ""
+        for i in range(len(self.board)):
+            string += chr(65 + i)
+            string += " "
+        return string
+
     def update_game_board(self, other, i, j):
         if (other.board[j][i] == "X" or other.board[j][i] == "O"):
             print(f"{self.name} has already deployed a bomb at this location")
@@ -200,8 +200,8 @@ class Player:
     
     def random_move(self):
         while True:
-            i = random.randint(0, 5)
-            j = random.randint(0, 5)
+            i = random.randint(0, len(self.board) - 1)
+            j = random.randint(0, len(self.board) - 1)
             if (self.deployments[j][i] == "X" or self.deployments[j][i] == "O"):
                 continue
             else:
