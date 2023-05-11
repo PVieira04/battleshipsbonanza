@@ -4,6 +4,7 @@
 
 import random
 import sys
+import time
 
 class Game:
     def run_game():
@@ -26,13 +27,15 @@ class Game:
             Game.handle_bomb_deployment(user, comp, bomb)
             if (user.check_win_condition(comp)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
+            time.sleep(2)
             Game.comp_makes_a_move(user, comp)
             if (comp.check_win_condition(user)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
+            time.sleep(2)
 
     def display_game_boards(user, comp):
         user.print_board()
-        comp.print_board()
+        #comp.print_board()
     
     def ask_user_to_deploy_bombs():
         # Ask user for input.
