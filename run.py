@@ -35,8 +35,8 @@ class Game:
     """
     def run_game():
         # Initialise the game.
-        user = Player("User")
-        comp = Player("Computer")
+        user = Player("User", 6)
+        comp = Player("Computer", 6)
         Game.set_game_boards(user, comp)
         return
 
@@ -49,7 +49,7 @@ class Game:
         # The main game loop runs here. Only exits with winning condition.
         while True:
             Game.display_game_boards(user, comp)
-            bomb = Game.ask_user_to_deploy_bombs()
+            bomb = Game.ask_user_to_deploy_bombs(user)
             Game.handle_bomb_deployment(user, comp, bomb)
             if (user.check_win_condition(comp)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
@@ -63,19 +63,19 @@ class Game:
         user.print_board()
         #comp.print_board()
     
-    def ask_user_to_deploy_bombs():
+    def ask_user_to_deploy_bombs(user):
         # Ask user for input.
         while (True):
             bomb_location = input("Type where you would like to place your bomb (e.g. A1): ")
             stripped_bomb = bomb_location.replace(" ", "")
-            if (Game.validate_bomb_deployment(stripped_bomb)):
+            if (Game.validate_bomb_deployment(stripped_bomb, user)):
                 # Go to handle_bomb_deployment.
                 return stripped_bomb
             else:
                 print("Please try again.")
                 print("")
     
-    def validate_bomb_deployment(bomb):
+    def validate_bomb_deployment(bomb, user):
         if (len(bomb) != 2):
             print(f'Invalid input. String must be 2 characters long.')
             return False
@@ -84,16 +84,16 @@ class Game:
             print(f'Invalid input. The first character must be a letter ranging from A to F.')
             return False
 
-        if (ord(bomb[0].upper()) < 65 or ord(bomb[0].upper()) > 70):
+        if (ord(bomb[0].upper()) < 65 or ord(bomb[0].upper()) > 65 + len(user.board)):
             print(f'Invalid input. The first character must be a letter ranging from A to F.')
             return False
 
         if (bomb[1].isnumeric() == False):
-            print(f'Invalid input. The second character must be a number between 1 and 6.')
+            print(f'Invalid input. The second character must be a number between 1 and {len(user.board)}.')
             return False
 
-        if (int(bomb[1]) < 1 or int(bomb[1]) > 6):
-            print(f'Invalid input. The second character must be a number between 1 and 6.')
+        if (int(bomb[1]) < 1 or int(bomb[1]) > len(user.board)):
+            print(f'Invalid input. The second character must be a number between 1 and {len(user.board)}.')
             return False
 
         # I could also check to see if the user has already deployed a bomb at that location but that's a skill issue imo.
@@ -136,17 +136,14 @@ class Game:
 
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name, size):
         self.name = name
-        self.board = [
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " "]
-        ]
+        self.board = self.set_board_size(size) 
+        self.deployments = self.board
     
+    def set_board_size(self, size):
+        return [[' ' for _ in range(size)] for _ in range(size)]
+
     def initialise_player(self):       
         self.deployments = [
                 [" ", " ", " ", " ", " ", " "],
@@ -162,9 +159,9 @@ class Player:
     def generate_game_board(self):
         # Section to come up with locations
         locations = []
-        while (len(locations) < 6):
-            i = random.randint(0, 5)
-            j = random.randint(0, 5)
+        while (len(locations) < len(self.board)):
+            i = random.randint(0, len(self.board) - 1)
+            j = random.randint(0, len(self.board) - 1)
             if ([i, j] in locations):
                 continue
             else:
