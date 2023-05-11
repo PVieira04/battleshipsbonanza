@@ -7,6 +7,32 @@ import sys
 import time
 
 class Game:
+    """
+    A class to represent the game - Battleships Bonanza.
+    
+    ...
+
+    Methods
+    -------
+    run_game():
+        Runs the game.
+    set_game_boards(user,comp):
+        Sets up the game boards for all players.
+    main_game_loop(user, comp):
+        This is where the main loop of the game resides.
+    display_game_boards(user, comp):
+        Displays game boards in the terminal.
+    ask_user_to_deploy_bombs():
+        Asks the user for input and exports a string.
+    validate_bomb_deployment(bomb):
+        Ensures user input is valid.
+    handle_bomb_deployment(user, comp, bomb):
+        Converts user input to identify correct element in nested list.
+    comp_makes_a_move(user, comp):
+        Computer selects a random cell to attack.
+    ask_if_user_wishes_to_play_again(user, comp):
+        Asks user if they wish to play the game again.
+    """
     def run_game():
         # Initialise the game.
         user = Player("User")
