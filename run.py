@@ -184,7 +184,7 @@ class Player:
         return string
 
     def update_game_board(self, other, i, j):
-        if (other.board[j][i] == "X" or other.board[j][i] == "O"):
+        if other.board[j][i] in ["X", "O"]:
             print(f"{self.name} has already deployed a bomb at this location")
             print("")
             return
@@ -202,7 +202,7 @@ class Player:
         while True:
             i = random.randint(0, len(self.board) - 1)
             j = random.randint(0, len(self.board) - 1)
-            if (self.deployments[j][i] == "X" or self.deployments[j][i] == "O"):
+            if self.deployments[j][i] in ["X", "O"]:
                 continue
             else:
                 computer_move = [i, j]
