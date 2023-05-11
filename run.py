@@ -35,11 +35,26 @@ class Game:
     """
     def run_game():
         # Initialise the game.
-        size = 4
+        size = Game.ask_user_for_board_size()
         user = Player("User", size)
         comp = Player("Computer", size)
         Game.set_game_boards(user, comp)
         return
+
+    def ask_user_for_board_size():
+        print("")
+        print("The following prompt will accept any number between 4 and 9 inclusive.")
+        print("This will set the size of the board, for example:")
+        print("Entering '4' will set the board to a 4 by 4 square.")
+        while True:
+            print("")
+            try:
+                size = int(input("What size of board would you like? "))
+                if size not in range(4, 10):
+                    raise ValueError("Invalid input. Please enter a number between 4 and 9 inclusive.")
+                return size
+            except:
+                print("Invalid input. Please enter a number between 4 and 9 inclusive.")
 
     def set_game_boards(user, comp):
         user.generate_game_board()
