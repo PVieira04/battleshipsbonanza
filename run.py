@@ -38,17 +38,19 @@ class Game:
         print("")
         print("Developed by Patrick Vieira")
         print("")
-        print("")
-        Game.user_options()
+        Game.main_menu()
     
-    def user_options():
+    def main_menu():
+        print("")
         while True:
-            command = input("Type 'play' to play the game: ")
-            if command != "play":
+            command = input("Type 'play' to play the game or 'exit' to exit: ")
+            if command == "play":
+                Game.run_game()
+            elif command == "exit":
+                sys.exit()
+            else:
                 print("Invalid command. Please try again.")
                 print("")
-            else: break
-        Game.run_game()
 
     def run_game():
         # Initialise the game.
@@ -151,21 +153,28 @@ class Game:
     
     def ask_if_user_wishes_to_play_again(user, comp):
         # Ask user if they wish to play the game again.
+        print("For the next prompt, type 'play' to play again,")
+        print("'exit' to end the program or 'main' to go back to the main menu.")
+        print("")
         while True:
-            play_again = input("Would you like to play again? (y/n): ")
-            if (play_again == "y"):
+            play_again = input("What would you like to do now? ")
+            if (play_again == "play"):
                 print("")
                 print("New Game!")
                 print("")
                 del user
                 del comp
                 Game.run_game()
-            elif (play_again == "n"):
+            elif (play_again == "exit"):
+                print("")
                 print("I hope you had fun playing!")
                 print("Now closing program...")
                 sys.exit()
+            elif (play_again == "main"):
+                Game.main_menu()
             else:
                 print("Invalid input, please try again.")
+                print("")
         return
     
 
@@ -201,7 +210,7 @@ class Player:
         print("")
         print(f"{self.name}'s board:      {self.name}'s deployments:")
         print("")
-        print(f"  {self.print_column_headers()}            {self.print_column_headers()}")
+        print(f"  {self.print_column_headers()}           {self.print_column_headers()}")
         for i, row in enumerate(self.board):
             print(f"{str(i + 1)} {' '.join(row)}          {str(i + 1)} {' '.join(self.deployments[i])}")
         print("")
@@ -245,6 +254,7 @@ class Player:
             self.print_board()
             other.print_board()
             print(f'Game Over! {self.name} wins!!')
+            print("")
             return True
 
 Game.welcome_to_the_game()
