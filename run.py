@@ -33,6 +33,23 @@ class Game:
     ask_if_user_wishes_to_play_again(user, comp):
         Asks user if they wish to play the game again.
     """
+    def welcome_to_the_game():
+        print("Welcome to Battleships Bonanza!")
+        print("")
+        print("Developed by Patrick Vieira")
+        print("")
+        print("")
+        Game.user_options()
+    
+    def user_options():
+        while True:
+            command = input("Type 'play' to play the game: ")
+            if command != "play":
+                print("Invalid command. Please try again.")
+                print("")
+            else: break
+        Game.run_game()
+
     def run_game():
         # Initialise the game.
         size = Game.ask_user_for_board_size()
@@ -230,4 +247,4 @@ class Player:
             print(f'Game Over! {self.name} wins!!')
             return True
 
-Game.run_game()
+Game.welcome_to_the_game()
