@@ -90,7 +90,6 @@ class Game:
     def random_placement(user, comp):
         battleship_locations = user.random_battleship_placement()
         print(f"Battleship Locations: {battleship_locations}")
-        user.add_locations_to_game_board(battleship_locations)
         Game.set_computer_game_board(user, comp)
     
     def manual_placement(user, comp):
@@ -100,7 +99,6 @@ class Game:
     def set_computer_game_board(user, comp):
         print("Setting up Computer Board")
         battleship_locations = comp.random_battleship_placement()
-        comp.add_locations_to_game_board(battleship_locations)
         Game.main_game_loop(user, comp)
 
     def set_game_boards(user, comp):
@@ -124,7 +122,7 @@ class Game:
 
     def display_game_boards(user, comp):
         user.print_board()
-        comp.print_board()
+        #comp.print_board()
     
     def ask_user_to_deploy_bombs(user):
         # Ask user for input.
@@ -299,6 +297,7 @@ class Player:
             if (i > self.board_size - ship_len and j > self.board_size - ship_len):
                 continue
             location_already_exists = False
+            vertical = random.randint(0, 1)
             new_ship = []
             for count in range(ship_len):
                 if i > self.board_size - ship_len:
@@ -306,7 +305,6 @@ class Player:
                 elif j > self.board_size - ship_len:
                     new_location = [i + count, j]
                 else:
-                    vertical = random.randint(0, 1)
                     new_location = [i, j + count] if vertical == 1 else [i + count, j]
                 if new_location in battleship_locations:
                     location_already_exists = True
@@ -315,17 +313,30 @@ class Player:
             if location_already_exists == False:
                 for coordinate in new_ship:
                     battleship_locations.append(coordinate)
+                self.add_locations_to_game_board(new_ship, ship_len)
                 return battleship_locations
             else:
                 continue
     
-    def add_locations_to_game_board(self, battleship_locations):
+    def add_locations_to_game_board(self, battleship_locations, ship_len):
         for j, sub_array in enumerate(self.board):
             for i, element in enumerate(sub_array):
                 if ([i, j] in battleship_locations):
-                    self.board[j][i] = "*"
-                else:
-                    self.board[j][i] = " "
+                    self.board[j][i] = Player.print_battleship_character(ship_len)
+    
+    def print_battleship_character(ship_len):
+        if ship_len == 7:
+            return "L"
+        elif ship_len == 6:
+            return "K"
+        elif ship_len == 5:
+            return "T"
+        elif ship_len == 4:
+            return "R"
+        elif ship_len == 3:
+            return "Z"
+        else:
+            return "S"
 
     def generate_game_board(self):
         # Section to come up with locations
