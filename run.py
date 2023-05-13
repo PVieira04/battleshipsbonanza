@@ -97,7 +97,7 @@ class Game:
         Game.set_computer_game_board(user, comp)
     
     def set_computer_game_board(user, comp):
-        comp.random_battleship_placement()
+        battleship_locations = comp.random_battleship_placement()
         comp.add_locations_to_game_board(battleship_locations)
         Game.main_game_loop(user, comp)
 
