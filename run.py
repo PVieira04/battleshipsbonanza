@@ -225,31 +225,31 @@ class Player:
     def set_board_size(self, size):
         return [[' ' for _ in range(size)] for _ in range(size)]
     
-    def set_number_of_leviathan(board_size):
+    def set_number_of_leviathan(self, board_size):
         if board_size > 7:
             return 1
 
-    def set_number_of_kraken(board_size):
+    def set_number_of_kraken(self, board_size):
         if board_size > 6:
             return 1
     
-    def set_number_of_titan(board_size):
+    def set_number_of_titan(self, board_size):
         if board_size > 5:
             return 1
     
-    def set_number_of_ravana(board_size):
+    def set_number_of_ravana(self, board_size):
         if board_size > 8:
             return 2
         if board_size > 4:
             return 1
 
-    def set_number_of_zurvan(board_size):
+    def set_number_of_zurvan(self, board_size):
         if board_size > 8:
             return 2
         if board_size > 3:
             return 1
     
-    def set_number_of_sephirot(board_size):
+    def set_number_of_sephirot(self, board_size):
         if board_size > 8:
             return 3
         if board_size > 3:
