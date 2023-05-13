@@ -57,6 +57,7 @@ class Game:
         size = Game.ask_user_for_board_size()
         user = Player("User", size)
         comp = Player("Computer", size)
+        #Game.ask_user_for_random_or_manual_placement_of_battlships(user, comp)
         Game.set_game_boards(user, comp)
         return
 
@@ -74,6 +75,30 @@ class Game:
                 return size
             except:
                 print("Invalid input. Please enter a number between 4 and 9 inclusive.")
+    
+    def ask_user_for_random_or_manual_placement_of_battlships(user, comp):
+        while True:
+            print("")
+            string = input("Type 'random' for random battleship placement or type 'manual' to place them yourself: ")
+            if string == 'random':
+                Game.random_placement(user, comp)
+            elif string == 'manual':
+                Game.manual_placement(user, comp)
+            else:
+                print("Invalid input, please try again.")
+    
+    def random_placement(user, comp):
+        user.random_placement()
+        Game.set_computer_game_board()
+        
+    
+    def manual_placement():
+        user.manual_placement()
+        Game.set_computer_game_board()
+    
+    def set_computer_game_board():
+        comp.random_placement()
+        Game.main_game_loop(user, comp)
 
     def set_game_boards(user, comp):
         user.generate_game_board()
