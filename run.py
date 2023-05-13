@@ -216,12 +216,12 @@ class Player:
         self.board_size = size
         self.board = self.set_board_size(size) 
         self.deployments = self.set_board_size(size)
-        self.leviathan_num = self.set_number_of_leviathan(size)
-        self.kraken_num = self.set_number_of_kraken(size)
-        self.titan_num = self.set_number_of_titan(size)
-        self.ravana_num = self.set_number_of_ravana(size)
-        self.zurvan_num = self.set_number_of_zurvan(size)
-        self.sephirot_num = self.set_number_of_sephirot(size)
+        self.leviathan_num = self.set_number_of_leviathan()
+        self.kraken_num = self.set_number_of_kraken()
+        self.titan_num = self.set_number_of_titan()
+        self.ravana_num = self.set_number_of_ravana()
+        self.zurvan_num = self.set_number_of_zurvan()
+        self.sephirot_num = self.set_number_of_sephirot()
     
     def set_board_size(self, size):
         return [[' ' for _ in range(size)] for _ in range(size)]
@@ -278,17 +278,17 @@ class Player:
             battleship_locations = place_random_battleship(battleship_locations, self.titan_len)
         if self.board_size > 4:
             battleship_locations = place_random_battleship(battleship_locations, self.ravana_len)
-        if self.board_size = 9:
+        if self.board_size == 9:
             battleship_locations = place_random_battleship(battleship_locations, self.ravana_len)
         if self.board_size > 3:
             battleship_locations = place_random_battleship(battleship_locations, self.zurvan_len)
-        if self.board_size = 9:
+        if self.board_size == 9:
             battleship_locations = place_random_battleship(battleship_locations, self.zurvan_len)
         if self.board_size > 3:
             battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
         if self.board_size > 3:
             battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
-        if self.board_size = 9:
+        if self.board_size == 9:
             battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
         return battleship_locations
     
