@@ -57,8 +57,8 @@ class Game:
         size = Game.ask_user_for_board_size()
         user = Player("User", size)
         comp = Player("Computer", size)
-        #Game.ask_user_for_random_or_manual_placement_of_battlships(user, comp)
-        Game.set_game_boards(user, comp)
+        Game.ask_user_for_random_or_manual_placement_of_battlships(user, comp)
+        #Game.set_game_boards(user, comp)
         return
 
     def ask_user_for_board_size():
@@ -89,6 +89,7 @@ class Game:
     
     def random_placement(user, comp):
         battleship_locations = user.random_battleship_placement()
+        print(f"Battleship Locations: {battleship_locations}")
         user.add_locations_to_game_board(battleship_locations)
         Game.set_computer_game_board(user, comp)
     
@@ -97,6 +98,7 @@ class Game:
         Game.set_computer_game_board(user, comp)
     
     def set_computer_game_board(user, comp):
+        print("Setting up Computer Board")
         battleship_locations = comp.random_battleship_placement()
         comp.add_locations_to_game_board(battleship_locations)
         Game.main_game_loop(user, comp)
@@ -249,25 +251,45 @@ class Player:
     def random_battleship_placement(self):
         battleship_locations = []
         if self.board_size > 7:
-            battleship_locations = place_random_battleship(battleship_locations, self.leviathan_len)
+            print("Placing Leviathan")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.leviathan_len)
+            print(f"Current {battleship_locations}")
         if self.board_size > 6:
-            battleship_locations = place_random_battleship(battleship_locations, self.kraken_len)
+            print("Placing Kraken")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.kraken_len)
+            print(f"Current {battleship_locations}")
         if self.board_size > 5:
-            battleship_locations = place_random_battleship(battleship_locations, self.titan_len)
+            print("Placing Titan")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.titan_len)
+            print(f"Current {battleship_locations}")
         if self.board_size > 4:
-            battleship_locations = place_random_battleship(battleship_locations, self.ravana_len)
+            print("Placing Ravana")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.ravana_len)
+            print(f"Current {battleship_locations}")
         if self.board_size == 9:
-            battleship_locations = place_random_battleship(battleship_locations, self.ravana_len)
+            print("Placing Ravana")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.ravana_len)
+            print(f"Current {battleship_locations}")
         if self.board_size > 3:
-            battleship_locations = place_random_battleship(battleship_locations, self.zurvan_len)
+            print("Placing Zurvan")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.zurvan_len)
+            print(f"Current {battleship_locations}")
         if self.board_size == 9:
-            battleship_locations = place_random_battleship(battleship_locations, self.zurvan_len)
+            print("Placing Zurvan")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.zurvan_len)
+            print(f"Current {battleship_locations}")
         if self.board_size > 3:
-            battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
+            print("Placing Sephirot")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.sephirot_len)
+            print(f"Current {battleship_locations}")
         if self.board_size > 3:
-            battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
+            print("Placing Sephirot")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.sephirot_len)
+            print(f"Current {battleship_locations}")
         if self.board_size == 9:
-            battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
+            print("Placing Sephirot")
+            battleship_locations = self.place_random_battleship(battleship_locations, self.sephirot_len)
+            print(f"Current {battleship_locations}")
         return battleship_locations
 
     def place_random_battleship(self, battleship_locations, ship_len):
@@ -277,7 +299,8 @@ class Player:
             if (i > self.board_size - ship_len and j > self.board_size - ship_len):
                 continue
             location_already_exists = False
-            for count in range(self.board_size):
+            new_ship = []
+            for count in range(ship_len):
                 if i > self.board_size - ship_len:
                     new_location = [i, j + count]
                 elif j > self.board_size - ship_len:
@@ -288,8 +311,10 @@ class Player:
                 if new_location in battleship_locations:
                     location_already_exists = True
                     break
-                battleship_locations.append(new_location)
+                new_ship.append(new_location)
             if location_already_exists == False:
+                for coordinate in new_ship:
+                    battleship_locations.append(coordinate)
                 return battleship_locations
             else:
                 continue
@@ -297,7 +322,7 @@ class Player:
     def add_locations_to_game_board(self, battleship_locations):
         for j, sub_array in enumerate(self.board):
             for i, element in enumerate(sub_array):
-                if ([i, j] in locations):
+                if ([i, j] in battleship_locations):
                     self.board[j][i] = "*"
                 else:
                     self.board[j][i] = " "
