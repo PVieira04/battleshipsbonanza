@@ -227,46 +227,22 @@ class Player:
         return [[' ' for _ in range(size)] for _ in range(size)]
     
     def set_number_of_leviathan(self):
-        if self.board_size > 7:
-            return 1
-        else:
-            return 0
+        return 1 if self.board_size > 7 else 0
 
     def set_number_of_kraken(self):
-        if self.board_size > 6:
-            return 1
-        else:
-            return 0
+        return 1 if self.board_size > 6 else 0
     
     def set_number_of_titan(self):
-        if self.board_size > 5:
-            return 1
-        else:
-            return 0
+        return 1 if self.board_size > 5 else 0
     
     def set_number_of_ravana(self):
-        if self.board_size > 8:
-            return 2
-        elif self.board_size > 4:
-            return 1
-        else:
-            return 0
+        return 2 if self.board_size > 8 else 1 if self.board_size > 4 else 0
 
     def set_number_of_zurvan(self):
-        if self.board_size > 8:
-            return 2
-        elif self.board_size > 3:
-            return 1
-        else:
-            return 0
+        return 2 if self.board_size > 8 else 1
     
     def set_number_of_sephirot(self):
-        if self.board_size > 8:
-            return 3
-        elif self.board_size > 3:
-            return 2
-        else:
-            return 0
+        return 3 if self.board_size > 8 else 2
     
     def random_battleship_placement(self):
         battleship_locations = []
