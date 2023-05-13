@@ -274,6 +274,22 @@ class Player:
             battleship_locations = place_random_battleship(battleship_locations, self.leviathan_len)
         if self.board_size > 6:
             battleship_locations = place_random_battleship(battleship_locations, self.kraken_len)
+        if self.board_size > 5:
+            battleship_locations = place_random_battleship(battleship_locations, self.titan_len)
+        if self.board_size > 4:
+            battleship_locations = place_random_battleship(battleship_locations, self.ravana_len)
+        if self.board_size = 9:
+            battleship_locations = place_random_battleship(battleship_locations, self.ravana_len)
+        if self.board_size > 3:
+            battleship_locations = place_random_battleship(battleship_locations, self.zurvan_len)
+        if self.board_size = 9:
+            battleship_locations = place_random_battleship(battleship_locations, self.zurvan_len)
+        if self.board_size > 3:
+            battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
+        if self.board_size > 3:
+            battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
+        if self.board_size = 9:
+            battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
         return battleship_locations
     
     def place_random_battleship(self, battleship_locations, ship_len):
