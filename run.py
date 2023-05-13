@@ -180,13 +180,56 @@ class Game:
 
 
 class Player:
+    leviathan_len = 7
+    kraken_len = 6
+    titan_len = 5
+    ravana_len = 4
+    zurvan_len = 3
+    sephirot_len = 2
+
     def __init__(self, name, size):
         self.name = name
         self.board = self.set_board_size(size) 
         self.deployments = self.set_board_size(size)
+        self.leviathan_num = self.set_number_of_leviathan(size)
+        self.kraken_num = self.set_number_of_kraken(size)
+        self.titan_num = self.set_number_of_titan(size)
+        self.ravana_num = self.set_number_of_ravana(size)
+        self.zurvan_num = self.set_number_of_zurvan(size)
+        self.sephirot_num = self.set_number_of_sephirot(size)
     
     def set_board_size(self, size):
         return [[' ' for _ in range(size)] for _ in range(size)]
+    
+    def set_number_of_leviathan(board_size):
+        if board_size > 7:
+            return 1
+
+    def set_number_of_kraken(board_size):
+        if board_size > 6:
+            return 1
+    
+    def set_number_of_titan(board_size):
+        if board_size > 5:
+            return 1
+    
+    def set_number_of_ravana(board_size):
+        if board_size > 8:
+            return 2
+        if board_size > 4:
+            return 1
+
+    def set_number_of_zurvan(board_size):
+        if board_size > 8:
+            return 2
+        if board_size > 3:
+            return 1
+    
+    def set_number_of_sephirot(board_size):
+        if board_size > 8:
+            return 3
+        if board_size > 3:
+            return 2
 
     def generate_game_board(self):
         # Section to come up with locations
