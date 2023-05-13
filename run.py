@@ -279,19 +279,19 @@ class Player:
             j = random.randint(0, self.board_size - 1)
             if (i > self.board_size - self.leviathan_len and j > self.board_size - self.leviathan_len):
                 continue
-            elif i > self.board_size - self.leviathan_len:
-                # means ship can only be placed vertically.
-            elif j > self.board_size - self.leviathan_len:
-                # means ship can only be placed horizontally.
-            else:
-                # means ship could be placed either vertically or horizontally.
-                vertical = random.randint(0, 1)
-                # value of 1 means to place it vertically, 0 to place it horizontally.
-                for count in range(self.board_size):
-                    if vertical == 1:
-                        battleship_locations.append([i, j + 1])
-                    elif vertical == 0:
-                        battleship_locations.append([i + 1, j])
+            for count in range(self.board_size):
+                if i > self.board_size - self.leviathan_len:
+                    # means ship can only be placed vertically.
+                    battleship_locations.append([i, j + 1])
+                elif j > self.board_size - self.leviathan_len:
+                    # means ship can only be placed horizontally.
+                    battleship_locations.append([i + 1, j])
+                else:
+                    # means ship could be placed either vertically or horizontally.
+                    vertical = random.randint(0, 1)
+                    # value of 1 means to place it vertically, 0 to place it horizontally.
+                    battleship_locations.append([i, j + 1] if vertical == 1 else [i + 1, j])
+            return battleship_locations
 
     def generate_game_board(self):
         # Section to come up with locations
