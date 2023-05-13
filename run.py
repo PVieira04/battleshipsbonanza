@@ -89,13 +89,13 @@ class Game:
     
     def random_placement(user, comp):
         user.random_battleship_placement()
-        Game.set_computer_game_board()
+        Game.set_computer_game_board(user, comp)
     
-    def manual_placement():
+    def manual_placement(user, comp):
         user.manual_battleship_placement()
-        Game.set_computer_game_board()
+        Game.set_computer_game_board(user, comp)
     
-    def set_computer_game_board():
+    def set_computer_game_board(user, comp):
         comp.random_battleship_placement()
         Game.main_game_loop(user, comp)
 
