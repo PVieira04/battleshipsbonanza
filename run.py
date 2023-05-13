@@ -269,7 +269,7 @@ class Player:
         if self.board_size == 9:
             battleship_locations = place_random_battleship(battleship_locations, self.sephirot_len)
         return battleship_locations
-    
+
     def place_random_battleship(self, battleship_locations, ship_len):
         while True:
             i = random.randint(0, self.board_size - 1)
@@ -293,6 +293,14 @@ class Player:
                 return battleship_locations
             else:
                 continue
+    
+    def add_locations_to_game_board(self, battleship_locations):
+        for j, sub_array in enumerate(self.board):
+            for i, element in enumerate(sub_array):
+                if ([i, j] in locations):
+                    self.board[j][i] = "*"
+                else:
+                    self.board[j][i] = " "
 
     def generate_game_board(self):
         # Section to come up with locations
