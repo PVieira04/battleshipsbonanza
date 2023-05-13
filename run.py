@@ -272,6 +272,9 @@ class Player:
         battleship_locations = []
         if self.board_size > 7:
             battleship_locations = place_random_leviathan(battleship_locations)
+        if self.board_size > 6:
+            battleship_locations = place_random_kraken(battleship_locations)
+        return battleship_locations
 
     def place_random_leviathan(self, battleship_locations):
         while True:
@@ -282,16 +285,40 @@ class Player:
             for count in range(self.board_size):
                 if i > self.board_size - self.leviathan_len:
                     # means ship can only be placed vertically.
-                    battleship_locations.append([i, j + 1])
+                    battleship_locations.append([i, j + count])
                 elif j > self.board_size - self.leviathan_len:
                     # means ship can only be placed horizontally.
-                    battleship_locations.append([i + 1, j])
+                    battleship_locations.append([i + count, j])
                 else:
                     # means ship could be placed either vertically or horizontally.
                     vertical = random.randint(0, 1)
                     # value of 1 means to place it vertically, 0 to place it horizontally.
-                    battleship_locations.append([i, j + 1] if vertical == 1 else [i + 1, j])
+                    battleship_locations.append([i, j + count] if vertical == 1 else [i + count, j])
             return battleship_locations
+    
+    def place_random_kraken(self, battleship_locations):
+        while True:
+            i = random.randint(0, self.board_size - 1)
+            j = random.randint(0, self.board_size - 1)
+            if (i > self.board_size - self.kraken_len and j > self.board_size - self.kraken_len):
+                continue
+            location_already_exists = False
+            for count in range(self.board_size):
+                if i > self.board_size - self.kraken_len:
+                    new_location = [i, j + count]
+                elif j > self.board_size - self.kraken_len:
+                    new_location = [i + count, j]
+                else:
+                    vertical = random.randint(0, 1)
+                    new_location = [i, j + count] if vertical == 1 else [i + count, j]
+                if new_location in battleship_locations:
+                    location_already_exists = True
+                    break
+                battleship_locations.append(new_location)
+            if location_already_exists == False:
+                return battleship_locations
+            else:
+                continue
 
     def generate_game_board(self):
         # Section to come up with locations
