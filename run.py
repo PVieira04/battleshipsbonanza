@@ -88,16 +88,15 @@ class Game:
                 print("Invalid input, please try again.")
     
     def random_placement(user, comp):
-        user.random_placement()
+        user.random_battleship_placement()
         Game.set_computer_game_board()
-        
     
     def manual_placement():
-        user.manual_placement()
+        user.manual_battleship_placement()
         Game.set_computer_game_board()
     
     def set_computer_game_board():
-        comp.random_placement()
+        comp.random_battleship_placement()
         Game.main_game_loop(user, comp)
 
     def set_game_boards(user, comp):
