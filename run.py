@@ -380,7 +380,7 @@ class Player:
         elif (other.board[j][i] == " "):
             print(f"{self.name} missed.")
             other.board[j][i] = "X"
-        elif (other.board[j][i] == "*"):
+        elif (other.board[j][i] in ["L", "K", "T", "R", "Z", "S"]):
             print("It's a hit!")
             other.board[j][i] = "O"
         print("")
@@ -398,7 +398,7 @@ class Player:
                 return computer_move
     
     def check_win_condition(self, other):
-        if ("*" in [item for sublist in other.board for item in sublist]):
+        if any(char in ['L', 'K', 'T', 'R', 'Z', 'S'] for sublist in other.board for char in sublist):
             return False
         else:
             self.print_board()
