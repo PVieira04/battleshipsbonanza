@@ -108,7 +108,10 @@ class Game:
         while True:
             leviathan = input("Type the name of the cell you would like your Leviathan to start at: ")
             # Do some check here
+            if leviathan not in positions:
+                continue
             # If Leviathan is not in available cells: continue
+            print("")
             print("The Leviathan can be placed horizontally or vertically from this position.")
             print("Would you like to place it horizontally or vertically?")
             print("")
@@ -116,10 +119,12 @@ class Game:
                 direction = input("Type 'h' for horizontal or 'v' for vertical: ")
                 if direction not in ['h', 'v']:
                     continue
-                elif direction = 'h':
+                elif direction == 'h':
                     # Place it horizontally
-                elif direction = 'v':
+                    print("Placing Horizontally")
+                elif direction == 'v':
                     # Place it vertically
+                    print("Placing Vertically")
             user.manual_battleship_placement()
     
     def set_computer_game_board(user, comp):
@@ -376,7 +381,7 @@ class Player:
                     # Run a check to see if ship of a certain length can be placed there.
                     # Run the check both horizontally and vertically in both directions.
                     if (i + ship_len <= self.board_size or i - ship_len >= -1 or j + ship_len <= self.board_size or j - ship_len >= -1):
-                        available_positions.append(user.convert_coordinate_to_cell_name(i, j))
+                        available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
         return available_positions
     
     def convert_coordinate_to_cell_name(i, j):
