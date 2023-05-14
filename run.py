@@ -105,12 +105,14 @@ class Game:
             positions = user.calculate_available_battleship_positions(battleship.len)
             # When printing my variable 'positions', I could use a function to return a string - better readability.
             print(f"The {battleship.name}'s position can start from the following cells: {positions}")
-            print("")
             while True:
+                print("")
                 user_input = input(f"Type the name of the cell you would like your {battleship.name} to start at: ")
-                # If Leviathan is not in available cells: continue
+                # If input is not in available cells: continue
                 if user_input not in positions:
+                    print("Invalid input, please try again.")
                     continue
+                # If battleship can be placed horizontal and vertical
                 print("")
                 print(f"This {battleship.name} can be placed horizontally or vertically from this position.")
                 print("Would you like to place it horizontally or vertically?")
@@ -125,6 +127,8 @@ class Game:
                     elif direction == 'v':
                         # Place it vertically
                         print("Placing Vertically")
+                    print("")
+                    print(f"This {battleship.name} can be placed")
                     user.manual_battleship_placement(user_input, direction)
         Game.set_computer_game_board(user, comp)
     
@@ -380,46 +384,41 @@ class Player:
                 # If a cell is empty...
                 if element == " ":
                     # Run a check to see if ship of a certain length can be placed there.
-                    # Run the check both horizontally and vertically in both directions.
-                    if (i + ship_len <= self.board_size or i - ship_len >= -1 or j + ship_len <= self.board_size or j - ship_len >= -1):
-                        # Now we need to do another check to see if another ship is blocking our path
-                        if not self.other_battleships_in_the_way(i, j, ship_len):
-                            available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
+                    # Run the check both horizontally and vertically, and in both directions.
+                    # Run a further check to see if another ship is blocking our path
+                    if i + ship_len <= self.board_size:
+                        self.other_battleships_to_the_right(i, j, ship_len)
+                        available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
+                    elif i - ship_len >= -1:
+                        self.other_battleships_to_the_left(i, j, ship_len)
+                        available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
+                    elif j + ship_len <= self.board_size:
+                        self.other_battleships_downwards(i, j, ship_len)
+                        available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
+                    elif j - ship_len >= -1:
+                        self.other_battleships_upwards(i, j, ship_len)
+                        available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
         return available_positions
     
-    def other_battleships_in_the_way(self, i, j, ship_len):
-        right = False
-        left = False
-        down = False
-        up = False
-        if (i + ship_len <= self.board_size):
-            for col in range(i, i + ship_len - 1):
-                if not self.board[j][col] == " ":
-                    right = True
-                    break
-        else:
-            right = True
-        if (i - ship_len >= -1):
-            for col in range(i - ship_len + 1, i):
-                if not self.board[j][col] == " ":
-                    left = True
-                    break
-        else:
-            left = True
-        if (j + ship_len <= self.board_size):
-            for row in range(j, j + ship_len - 1):
-                if not self.board[row][i] == " ":
-                    down = True
-                    break
-        else:
-            down = True
-        if (j - ship_len >= -1):
-            for row in range(j - ship_len + 1, j):
-                up = True
-                break
-        else:
-            up = True
-        return up and down and left and right
+    def other_battleships_to_the_right(self, i, j, ship_len):
+        for col in range(i, i + ship_len - 1):
+            if not self.board[j][col] == " ":
+                return True
+
+    def other_battleships_to_the_left(self, i, j, ship_len):
+        for col in range(i - ship_len + 1, i):
+            if not self.board[j][col] == " ":
+                return True
+
+    def other_battleships_downwards(self, i, j, ship_len):
+        for row in range(j, j + ship_len - 1):
+            if not self.board[row][i] == " ":
+                return True
+    
+    def other_battleships_upwards(self, i, j, ship_len):
+        for row in range(j - ship_len + 1, j):
+            if not self.board[row][i] == " ":
+                return True
 
     def convert_coordinate_to_cell_name(i, j):
         return f"{chr(i + 65)}{j + 1}"
