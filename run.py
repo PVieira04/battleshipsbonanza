@@ -218,11 +218,6 @@ class Game:
         battleship_locations = comp.random_battleship_placement()
         Game.main_game_loop(user, comp)
 
-    def set_game_boards(user, comp):
-        user.generate_game_board()
-        comp.generate_game_board()
-        Game.main_game_loop(user, comp)
-
     def main_game_loop(user, comp):
         # The main game loop runs here. Only exits with winning condition.
         while True:
@@ -557,24 +552,6 @@ class Player:
             elif direction == 'u':
                 self.board[j - count][i] = char
         return
-
-    def generate_game_board(self):
-        # Section to come up with locations
-        locations = []
-        while (len(locations) < len(self.board)):
-            i = random.randint(0, len(self.board) - 1)
-            j = random.randint(0, len(self.board) - 1)
-            if ([i, j] in locations):
-                continue
-            else:
-                locations.append([i, j])
-        # Section to assign ships
-        for j, sub_array in enumerate(self.board):
-            for i, element in enumerate(sub_array):
-                if ([i, j] in locations):
-                    self.board[j][i] = "*"
-                else:
-                    self.board[j][i] = " "
 
     def print_board(self):
         print("")
