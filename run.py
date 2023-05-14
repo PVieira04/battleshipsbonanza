@@ -466,6 +466,7 @@ class Battleship:
         self.name = name
         self.len = length
         self.char = char
+        Battleship.all_instances.append(self)
     
 leviathan = Battleship("Leviathan", 7, "L")
 kraken = Battleship("Kraken", 6, "K")
