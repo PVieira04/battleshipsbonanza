@@ -93,8 +93,34 @@ class Game:
         Game.set_computer_game_board(user, comp)
     
     def manual_placement(user, comp):
-        user.manual_battleship_placement()
+        Game.manual_leviathan_placement(user)
         Game.set_computer_game_board(user, comp)
+        
+    def manual_leviathan_placement(user):
+        print("")
+        user.print_board()
+        print("")
+        # Variable 'positions' is a list of cell names, e.g. ["A1", "B1", ...] etc.
+        positions = user.calculate_available_battleship_positions(user.leviathan_len)
+        # When printing my variable 'positions', I could use a function to return a string - better readability.
+        print(f"The Leviathan's position can start from the following cells: {positions}")
+        print("")
+        while True:
+            leviathan = input("Type the name of the cell you would like your Leviathan to start at: ")
+            # Do some check here
+            # If Leviathan is not in available cells: continue
+            print("The Leviathan can be placed horizontally or vertically from this position.")
+            print("Would you like to place it horizontally or vertically?")
+            print("")
+            while True:
+                direction = input("Type 'h' for horizontal or 'v' for vertical: ")
+                if direction not in ['h', 'v']:
+                    continue
+                elif direction = 'h':
+                    # Place it horizontally
+                elif direction = 'v':
+                    # Place it vertically
+            user.manual_battleship_placement()
     
     def set_computer_game_board(user, comp):
         print("Setting up Computer Board")
@@ -337,6 +363,27 @@ class Player:
             return "Z"
         else:
             return "S"
+    
+    def calculate_available_battleship_positions(self, ship_len):
+        # In this method, I want to be able to calculate all available positions for any battleship.
+        # Define an empty list
+        available_positions = []
+        # Iterate through user.board
+        for j, sub_array in enumerate(self.board):
+            for i, element in enumerate(sub_array):
+                # If a cell is empty...
+                if element == " ":
+                    # Run a check to see if ship of a certain length can be placed there.
+                    # Run the check both horizontally and vertically in both directions.
+                    if (i + ship_len <= self.board_size or i - ship_len >= -1 or j + ship_len <= self.board_size or j - ship_len >= -1):
+                        available_positions.append(user.convert_coordinate_to_cell_name(i, j))
+        return available_positions
+    
+    def convert_coordinate_to_cell_name(i, j):
+        return f"{chr(i + 65)}{j + 1}"
+
+    def manual_battleship_placement(self, ):
+        return
 
     def generate_game_board(self):
         # Section to come up with locations
