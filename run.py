@@ -96,7 +96,7 @@ class Game:
         battleship_instances = Battleship.get_all_instances()
         for battleship in battleship_instances:
             # Check if battleship can be placed on board
-            if not user.battleship_can_be_placed_on_board(battleship.len):
+            if not user.battleship_can_be_placed_on_board(battleship.len, battleship.version):
                 continue
             print("")
             user.print_board()
@@ -107,13 +107,12 @@ class Game:
             print(f"The {battleship.name}'s position can start from the following cells: {positions}")
             print("")
             while True:
-                leviathan = input("Type the name of the cell you would like your Leviathan to start at: ")
-                # Do some check here
-                if leviathan not in positions:
-                    continue
+                user_input = input(f"Type the name of the cell you would like your {battleship.name} to start at: ")
                 # If Leviathan is not in available cells: continue
+                if user_input not in positions:
+                    continue
                 print("")
-                print("The Leviathan can be placed horizontally or vertically from this position.")
+                print(f"This {battleship.name} can be placed horizontally or vertically from this position.")
                 print("Would you like to place it horizontally or vertically?")
                 print("")
                 while True:
@@ -126,7 +125,7 @@ class Game:
                     elif direction == 'v':
                         # Place it vertically
                         print("Placing Vertically")
-                user.manual_battleship_placement()
+                    user.manual_battleship_placement(user_input, direction)
         Game.set_computer_game_board(user, comp)
     
     def set_computer_game_board(user, comp):
@@ -383,9 +382,45 @@ class Player:
                     # Run a check to see if ship of a certain length can be placed there.
                     # Run the check both horizontally and vertically in both directions.
                     if (i + ship_len <= self.board_size or i - ship_len >= -1 or j + ship_len <= self.board_size or j - ship_len >= -1):
-                        available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
+                        # Now we need to do another check to see if another ship is blocking our path
+                        if not self.other_battleships_in_the_way(i, j, ship_len):
+                            available_positions.append(Player.convert_coordinate_to_cell_name(i, j))
         return available_positions
     
+    def other_battleships_in_the_way(self, i, j, ship_len):
+        right = False
+        left = False
+        down = False
+        up = False
+        if (i + ship_len <= self.board_size):
+            for col in range(i, i + ship_len - 1):
+                if not self.board[j][col] == " ":
+                    right = True
+                    break
+        else:
+            right = True
+        if (i - ship_len >= -1):
+            for col in range(i - ship_len + 1, i):
+                if not self.board[j][col] == " ":
+                    left = True
+                    break
+        else:
+            left = True
+        if (j + ship_len <= self.board_size):
+            for row in range(j, j + ship_len - 1):
+                if not self.board[row][i] == " ":
+                    down = True
+                    break
+        else:
+            down = True
+        if (j - ship_len >= -1):
+            for row in range(j - ship_len + 1, j):
+                up = True
+                break
+        else:
+            up = True
+        return up and down and left and right
+
     def convert_coordinate_to_cell_name(i, j):
         return f"{chr(i + 65)}{j + 1}"
 
@@ -483,7 +518,7 @@ class Battleship:
         Battleship.all_instances.append(self)
     
     def get_all_instances():
-        return all_instances
+        return Battleship.all_instances
     
 leviathan = Battleship("Leviathan", 7, "L", 1)
 kraken = Battleship("Kraken", 6, "K", 1)
