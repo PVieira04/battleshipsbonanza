@@ -93,39 +93,41 @@ class Game:
         Game.set_computer_game_board(user, comp)
     
     def manual_placement(user, comp):
-        Game.manual_leviathan_placement(user)
-        Game.set_computer_game_board(user, comp)
-        
-    def manual_leviathan_placement(user):
-        print("")
-        user.print_board()
-        print("")
-        # Variable 'positions' is a list of cell names, e.g. ["A1", "B1", ...] etc.
-        positions = user.calculate_available_battleship_positions(user.leviathan_len)
-        # When printing my variable 'positions', I could use a function to return a string - better readability.
-        print(f"The Leviathan's position can start from the following cells: {positions}")
-        print("")
-        while True:
-            leviathan = input("Type the name of the cell you would like your Leviathan to start at: ")
-            # Do some check here
-            if leviathan not in positions:
+        battleship_instances = Battleship.get_all_instances()
+        for battleship in battleship_instances:
+            # Check if battleship can be placed on board
+            if not user.battleship_can_be_placed_on_board(battleship.len):
                 continue
-            # If Leviathan is not in available cells: continue
             print("")
-            print("The Leviathan can be placed horizontally or vertically from this position.")
-            print("Would you like to place it horizontally or vertically?")
+            user.print_board()
+            print("")
+            # Variable 'positions' is a list of cell names, e.g. ["A1", "B1", ...] etc.
+            positions = user.calculate_available_battleship_positions(battleship.len)
+            # When printing my variable 'positions', I could use a function to return a string - better readability.
+            print(f"The {battleship.name}'s position can start from the following cells: {positions}")
             print("")
             while True:
-                direction = input("Type 'h' for horizontal or 'v' for vertical: ")
-                if direction not in ['h', 'v']:
+                leviathan = input("Type the name of the cell you would like your Leviathan to start at: ")
+                # Do some check here
+                if leviathan not in positions:
                     continue
-                elif direction == 'h':
-                    # Place it horizontally
-                    print("Placing Horizontally")
-                elif direction == 'v':
-                    # Place it vertically
-                    print("Placing Vertically")
-            user.manual_battleship_placement()
+                # If Leviathan is not in available cells: continue
+                print("")
+                print("The Leviathan can be placed horizontally or vertically from this position.")
+                print("Would you like to place it horizontally or vertically?")
+                print("")
+                while True:
+                    direction = input("Type 'h' for horizontal or 'v' for vertical: ")
+                    if direction not in ['h', 'v']:
+                        continue
+                    elif direction == 'h':
+                        # Place it horizontally
+                        print("Placing Horizontally")
+                    elif direction == 'v':
+                        # Place it vertically
+                        print("Placing Vertically")
+                user.manual_battleship_placement()
+        Game.set_computer_game_board(user, comp)
     
     def set_computer_game_board(user, comp):
         print("Setting up Computer Board")
@@ -387,6 +389,17 @@ class Player:
     def convert_coordinate_to_cell_name(i, j):
         return f"{chr(i + 65)}{j + 1}"
 
+    def battleship_can_be_placed_on_board(self, length, version):
+        return length == 7 and self.board_size > 7 \
+        or length == 6 and self.board_size > 6 \
+        or length == 5 and self.board_size > 5 \
+        or length == 4 and self.board_size > 4 and version == 1 \
+        or length == 4 and self.board_size == 9 and version == 2 \
+        or length == 3 and self.board_size > 3 and version == 1 \
+        or length == 3 and self.board_size == 9 and version == 2 \
+        or length == 2 and self.board_size > 3 and (version == 1 or version == 2) \
+        or length == 2 and self.board_size == 9 and version == 3
+
     def manual_battleship_placement(self, ):
         return
 
@@ -462,17 +475,25 @@ class Player:
 class Battleship:
     all_instances = []
 
-    def __init__(self, name, length, char):
+    def __init__(self, name, length, char, version):
         self.name = name
         self.len = length
         self.char = char
+        self.version = version
         Battleship.all_instances.append(self)
     
-leviathan = Battleship("Leviathan", 7, "L")
-kraken = Battleship("Kraken", 6, "K")
-titan = Battleship("Titan", 5, "T")
-ravana = Battleship("Ravana", 4, "R")
-zurvan = Battleship("Zurvan", 3, "Z")
-sephirot = Battleship("Sephirot", 2, "S")
+    def get_all_instances():
+        return all_instances
+    
+leviathan = Battleship("Leviathan", 7, "L", 1)
+kraken = Battleship("Kraken", 6, "K", 1)
+titan = Battleship("Titan", 5, "T", 1)
+ravana1 = Battleship("Ravana", 4, "R", 1)
+ravana2 = Battleship("Ravana", 4, "R", 2)
+zurvan1 = Battleship("Zurvan", 3, "Z", 1)
+zurvan2 = Battleship("Zurvan", 3, "Z", 2)
+sephirot1 = Battleship("Sephirot", 2, "S", 1)
+sephirot2 = Battleship("Sephirot", 2, "S", 2)
+sephirot3 = Battleship("Sephirot", 2, "S", 3)
 
 Game.welcome_to_the_game()
