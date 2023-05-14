@@ -14,10 +14,22 @@ class Game:
 
     Methods
     -------
+    welcome_to_the_game():
+        Prints a welcome message to the user.
+    main_menu():
+        Asks the user what they would like to do.
     run_game():
         Runs the game.
-    set_game_boards(user,comp):
-        Sets up the game boards for all players.
+    ask_user_for_board_size():
+        Asks the user what board size they wish to play.
+    ask_user_for_random_or_manual_placement_of_battlships():
+        Asks the user whether they would like to place ships themselves or get a random assignment of battleships.
+    random_placement():
+        Randomly assigns battleship places for user.
+    manual_placement():
+        Allows user to assign their own positions for battleships.
+    set_computer_game_board():
+        Randomly assigns battleship places for the computer.
     main_game_loop(user, comp):
         This is where the main loop of the game resides.
     display_game_boards(user, comp):
