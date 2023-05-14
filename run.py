@@ -459,4 +459,19 @@ class Player:
             print("")
             return True
 
+class Battleship:
+    all_instances = []
+
+    def __init__(self, name, length, char):
+        self.name = name
+        self.len = length
+        self.char = char
+    
+leviathan = Battleship("Leviathan", 7, "L")
+kraken = Battleship("Kraken", 6, "K")
+titan = Battleship("Titan", 5, "T")
+ravana = Battleship("Ravana", 4, "R")
+zurvan = Battleship("Zurvan", 3, "Z")
+sephirot = Battleship("Sephirot", 2, "S")
+
 Game.welcome_to_the_game()
