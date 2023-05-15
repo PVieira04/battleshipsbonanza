@@ -1,5 +1,7 @@
 # Battleships Bonanza
 
+Battleships Bonanza is a terminal-based game where users can play a game of battleships.
+
 Developed by Patrick Vieira
 
 
@@ -52,9 +54,42 @@ Developed by Patrick Vieira
 
 ### Target Audience
 
+A typical user will want to play a logic based game against a computer.
+
 ### User Goals
 
+- Have fun playing a logic based terminal game.
+
 ### User Story
+
+- User runs the program.
+- User reads welcome message and understands what they can do at the main menu.
+- User types in "play" to play the game.
+- User reads the instructions for the next part and understands they can choose from a 4x4 grid up to a 9x9 grid.
+- User enters the number "4".
+- User reads the next instructions and understands they can choose between a random assignment of battleships or place their own.
+- User wants to place their own battleships and so enters "manual".
+- User reads instructions on how to place battleships on the grid and understands.
+- User decides to place the Zurvan battleship starting at B2 and so enters "B2".
+- User then follows the instructions and enters "v" to place the Zurvan vertically downwards from B2.
+- User then places the first Sephirot battleship at C4 horizontally to the right by entering "C4" and then "h".
+- User then places the next Sephirot battleship at D2 vertically upwards by entering "D2", then "v", then "u".
+- User then reads the instructions on how to deploy bombs on the enemy battleship and enters "a1" for their first guess.
+- User sees that they missed, but computer hits - they hit D1.
+- User enters "b2". Hit. Computer also hits user at B3.
+- User enters "b1", but it misses. Computer also misses by deploying at A2.
+- User enters "a2", and that's a hit. Computer misses at C1.
+- User enters "c2" which hits. Computer misses again at A1.
+- User enters "d2" which misses. Computer also misses at A4.
+- User enters "c1" which hits. Computer misses again at D3.
+- User enters "c3" which hits. Computer misses again at B1.
+- User enters "c4" which misses. Computer also misses at C2.
+- User enters "d1" which misses. Computer hits this time at D2.
+- User enters "b3" which hits. Computer also hits at B2.
+- User enters "d3" which misses. Computer hits again at B4.
+- User enters "a3" which hits. This triggers the win condition. User wins.
+- User then reads the "Game Over" text and the following instructions.
+- User types "main" to go back to the main menu and then "exit" to exit the game.
 
 
 ## Planning
