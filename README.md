@@ -44,6 +44,12 @@ Developed by Patrick Vieira
 
 ### Key Project Goals
 
+1. Create a functional battleships game which ends once all battleships have sunk.
+2. Create a feature which allows the user to set the game board size.
+3. Create a feature that assigns random locations for battleships of different sizes.
+4. Create a feature which allows the user to place ships on the board manually.
+5. Create a feature which allows the user to view and submit high scores.
+
 ### Target Audience
 
 ### User Goals
