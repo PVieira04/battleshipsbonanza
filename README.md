@@ -2,9 +2,10 @@
 
 Developed by Patrick Vieira
 
-## Contents [Contents](#contents)
 
-* [User Experience (UX)](#user-experience-ux)
+## [Contents](#contents)
+
+* [User Experience](#user-experience)
   * [Key Project Goals](#key-project-goals)
   * [Target Audience](#target-audience)
   * [User Goals](#user-goals)
@@ -19,22 +20,93 @@ Developed by Patrick Vieira
 * [Technology](#technology)
   * [Languages](#languages)
 * [Design](#design)
-  * [Colour Scheme](#colour-scheme)
-  * [Typography](#typography)
-  * [Accessibility](#accessibility)
-  * [Imagery](#imagery)
+  * [UX Considerations](#ux-considerations)
   * [Wireframes](#wireframes)
 * [Features](#features)
-  * [Welcome Section](#welcome)
-  * [Local Storage](#local-storage)
-  * [Option Selection](#option-selection)
-  * [Feedback](#feedback)
-  * [Results](#results)
-  * [Fetching Data](#fetching-data)
-  * [Features Left to Implement](#features-left-to-implement)
+  * [Welcome Message](#welcome-message)
+  * [Main Menu](#main-menu)
+  * [Play Game](#play-game)
+  * [Board Size Selection](#board-size-selection)
+  * [Battleship Assignment Method](#battleship-assignment-method)
+  * [Random Assignment](#random-assignment)
+  * [Manual Assignment](#manual-assignment)
+  * [Main Game Loop](#main-game-loop)
+  * [Check Win Condition](#check-win-condition)
+  * [Game Over](#game-over)
+  * [Play Again](#play-again)
   * [Future Features](#future-features)
 * [Testing](#testing)
 * [Deployment](#deployment)
 * [Credits](#credits)
-  * [Content](#content)
-  * [Media](#media)
+
+
+## User Experience
+
+### Key Project Goals
+
+### Target Audience
+
+### User Goals
+
+### User Story
+
+
+## Planning
+
+### Strategy
+
+### Scope
+
+### Structure
+
+### Skeleton
+
+### Surface
+
+### Review with Mentor
+
+
+## Technology
+
+### Languages
+
+
+## Design
+
+### UX Considerations
+
+### wireframes
+
+
+## Features
+
+### Welcome Message
+
+### Main Menu
+
+### Play Game
+
+### Board Size Selection
+
+### Battleship Assignment Method
+
+### Random Assignment
+
+### Manual Assignment
+
+### Main Game Loop
+
+### Check Win Condition
+
+### Game Over
+
+### Play Again
+
+### Future Features
+
+
+## Testing
+
+## Deployment
+
+## Credits
