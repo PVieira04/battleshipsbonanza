@@ -18,7 +18,6 @@ Developed by Patrick Vieira
   * [Structure](#structure)
   * [Skeleton](#skeleton)
   * [Surface](#surface)
-  * [Review with Mentor](#review-with-mentor)
 * [Technology](#technology)
   * [Languages](#languages)
 * [Design](#design)
@@ -96,15 +95,64 @@ A typical user will want to play a logic based game against a computer.
 
 ### Strategy
 
+---
+| **Opportunity / Problem** | **Importance** | **Viability / Feasibility** | **Difficulty** |
+|-----------------------------|:-:|:-:|:-:|
+| Generate bame boards | 5 | 5 | 1 |
+| Validate user inputs | 5 | 5 | 1 |
+| Check win condition | 5 | 5 | 1 |
+| Have Computer select random cell | 4 | 5 | 2 |
+| Multiple game modes | 2 | 5 | 2 |
+| Multiple board sizes | 1 | 4 | 3 |
+| Record Score on Google Sheets | 2 | 4 | 3 |
+| Generate boards with different sized ships | 2 | 4 | 4 |
+| User to define battleship placement | 3 | 4 | 5 |
+| Include welcome message | 4 | 5 | 1 |
+| Alow user to view Leaderboard | 3 | 3 | 3 |
+---
+
 ### Scope
+
+All features can be included but implementation will be a gradual process. First, these will be prioritised:
+- Generate game boards
+- Validate user inputs
+- Check win condition
+- Have computer select random cell
+
+Once these have been implemented, production will then work on these features in the following order:
+
+1. Welcome Message
+2. Multiple board sizes
+3. Generate boards with different sized battleships
+4. User to define battleship placement
+5. Record Score on Google Sheets
+6. Allow user to view Leaderboard
+7. Multiple game modes
 
 ### Structure
 
+Two different flow charts were created for this project. One was simpler and only included the first four features. The more complex version implements all fatures.
+
+Simple Version:
+
+Complex Version:
+
 ### Skeleton
+
+The Skeleton Frame involves a mockup of how things would look to the user. As the terminal shares the same typography as microsoft notepad, Notepad was used to show a mockup of how the user will see the game board.
+
+User Battleship Placements:
+
+Computer Deployments:
+
+User Board:
 
 ### Surface
 
-### Review with Mentor
+As the surface is exclusively limited to the terminal, only a small amount can be said regarding this section.
+
+- User instructions and displaying of game boards will be adequately spaced out for readability.
+- Instructions will be given in a concise manner throughout the game.
 
 
 ## Technology
