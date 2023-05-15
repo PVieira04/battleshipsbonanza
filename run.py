@@ -5,6 +5,7 @@
 import random
 import sys
 import time
+import pdb
 
 class Game:
     """
@@ -124,70 +125,32 @@ class Game:
                 if user_input not in positions:
                     print("Invalid input, please try again.")
                     continue
-                print("")
-                # Check if battleship can be placed horizontal and / or vertical
-                i, j = Player.convert_cell_name_to_coordinate(user_input)
-                if user.battleship_can_be_placed_horizontally(i, j, battleship.len) and user.battleship_can_be_placed_vertically(i, j, battleship.len):
-                    print(f"This {battleship.name} can be placed horizontally or vertically from {user_input}.")
-                    print("Would you like to place it horizontally or vertically?")
-                    while True:
-                        print("")
-                        orientation = input("Type 'h' for horizontal or 'v' for vertical: ")
-                        print("")
-                        if orientation not in ['h', 'v']:
-                            print("Invalid input. Please try again.")
-                            continue
-                        elif orientation == 'h':
-                            # Place it horizontally
-                            print("Placing Horizontally")
-                            if user.battleship_can_be_placed_facing_right(i, j, battleship.len) and user.battleship_can_be_placed_facing_left(i, j, battleship.len):
-                                print(f"This {battleship.name} can be placed facing left or right from {user_input}.")
-                                while True:
-                                    print("")
-                                    direction = input(f"Type 'l' to face the {battleship.name} left or 'r' to face it right.")
-                                    if direction not in ['l', 'r']:
-                                        print("Invalid input. Please try again.")
-                                        continue
-                                    user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                                    break
-                            elif user.battleship_can_be_placed_facing_right(i, j, battleship.len):
-                                direction = 'r'
-                                print(f"This {battleship.name} will now be placed facing right from {user_input}.")
-                                user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                            else:
-                                direction = 'l'
-                                print(f"This {battleship.name} will now be placed facing left from {user_input}.")
-                                user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                        elif orientation == 'v':
-                            # Place it vertically
-                            print("Placing Vertically")
-                            if user.battleship_can_be_placed_facing_down(i, j, battleship.len) and user.battleship_can_be_placed_facing_up(i, j, battleship.len):
-                                print(f"This {battleship.name} can be placed facing down or up from {user_input}.")
-                                while True:
-                                    print("")
-                                    direction = input(f"Type 'd' to face the {battleship.name}down or 'u' to face it up.")
-                                    if direction not in ['d', 'u']:
-                                        print("Invalid input. Please try again.")
-                                        continue
-                                    user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                                    break
-                            elif user.battleship_can_be_placed_facing_down(i, j, battleship.len):
-                                direction = 'd'
-                                print(f"This {battleship.name} will now be placed facing down from {user_input}.")
-                                user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                            else:
-                                direction = 'u'
-                                print(f"This {battleship.name} will now be placed facing up from {user_input}.")
-                                user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                        break
-                elif user.battleship_can_be_placed_horizontally(i, j, battleship.len):
-                    # Check if battleship can be placed facing right and left
+                break
+            print("")
+            # Check if battleship can be placed horizontal and / or vertical
+            i, j = Player.convert_cell_name_to_coordinate(user_input)
+            # pdb.set_trace()
+            if user.battleship_can_be_placed_horizontally(i, j, battleship.len) and user.battleship_can_be_placed_vertically(i, j, battleship.len):
+                print(f"This {battleship.name} can be placed horizontally or vertically from {user_input}.")
+                print("Would you like to place it horizontally or vertically?")
+                while True:
+                    print("")
+                    orientation = input("Type 'h' for horizontal or 'v' for vertical: ")
+                    print("")
+                    if orientation not in ['h', 'v']:
+                        print("Invalid input. Please try again.")
+                        continue
+                    break
+                if orientation == 'h':
+                    # Place it horizontally
+                    print("Placing Horizontally")
                     if user.battleship_can_be_placed_facing_right(i, j, battleship.len) and user.battleship_can_be_placed_facing_left(i, j, battleship.len):
                         print(f"This {battleship.name} can be placed facing left or right from {user_input}.")
                         while True:
                             print("")
                             direction = input(f"Type 'l' to face the {battleship.name} left or 'r' to face it right.")
                             if direction not in ['l', 'r']:
+                                print("Invalid input. Please try again.")
                                 continue
                             user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
                             break
@@ -199,10 +162,8 @@ class Game:
                         direction = 'l'
                         print(f"This {battleship.name} will now be placed facing left from {user_input}.")
                         user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                    print("")
-                else:
-                    # Battleship must be able to be placed vertically.
-                    # Check if battleship can be placed facing up or down
+                elif orientation == 'v':
+                    # Place it vertically
                     print("Placing Vertically")
                     if user.battleship_can_be_placed_facing_down(i, j, battleship.len) and user.battleship_can_be_placed_facing_up(i, j, battleship.len):
                         print(f"This {battleship.name} can be placed facing down or up from {user_input}.")
@@ -222,7 +183,48 @@ class Game:
                         direction = 'u'
                         print(f"This {battleship.name} will now be placed facing up from {user_input}.")
                         user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
-                break   
+            elif user.battleship_can_be_placed_horizontally(i, j, battleship.len):
+                # Check if battleship can be placed facing right and left
+                if user.battleship_can_be_placed_facing_right(i, j, battleship.len) and user.battleship_can_be_placed_facing_left(i, j, battleship.len):
+                    print(f"This {battleship.name} can be placed facing left or right from {user_input}.")
+                    while True:
+                        print("")
+                        direction = input(f"Type 'l' to face the {battleship.name} left or 'r' to face it right.")
+                        if direction not in ['l', 'r']:
+                            continue
+                        user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
+                        break
+                elif user.battleship_can_be_placed_facing_right(i, j, battleship.len):
+                    direction = 'r'
+                    print(f"This {battleship.name} will now be placed facing right from {user_input}.")
+                    user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
+                else:
+                    direction = 'l'
+                    print(f"This {battleship.name} will now be placed facing left from {user_input}.")
+                    user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
+                print("")
+            else:
+                # Battleship must be able to be placed vertically.
+                # Check if battleship can be placed facing up or down
+                print("Placing Vertically")
+                if user.battleship_can_be_placed_facing_down(i, j, battleship.len) and user.battleship_can_be_placed_facing_up(i, j, battleship.len):
+                    print(f"This {battleship.name} can be placed facing down or up from {user_input}.")
+                    while True:
+                        print("")
+                        direction = input(f"Type 'd' to face the {battleship.name}down or 'u' to face it up.")
+                        if direction not in ['d', 'u']:
+                            print("Invalid input. Please try again.")
+                            continue
+                        user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
+                        break
+                elif user.battleship_can_be_placed_facing_down(i, j, battleship.len):
+                    direction = 'd'
+                    print(f"This {battleship.name} will now be placed facing down from {user_input}.")
+                    user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
+                else:
+                    direction = 'u'
+                    print(f"This {battleship.name} will now be placed facing up from {user_input}.")
+                    user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
         Game.set_computer_game_board(user, comp)
     
     def set_computer_game_board(user, comp):
@@ -486,7 +488,7 @@ class Player:
     
     def other_battleships_to_the_right(self, i, j, ship_len):
         if i + ship_len <= self.board_size:
-            for col in range(i, i + ship_len - 1):
+            for col in range(i, i + ship_len):
                 if not self.board[j][col] == " ":
                     return True
         else:
@@ -495,7 +497,7 @@ class Player:
 
     def other_battleships_to_the_left(self, i, j, ship_len):
         if i - ship_len >= -1:
-            for col in range(i - ship_len + 1, i):
+            for col in range(i - ship_len + 1, i + 1):
                 if not self.board[j][col] == " ":
                     return True
         else:
@@ -503,7 +505,7 @@ class Player:
 
     def other_battleships_downwards(self, i, j, ship_len):
         if j + ship_len <= self.board_size:
-            for row in range(j, j + ship_len - 1):
+            for row in range(j, j + ship_len):
                 if not self.board[row][i] == " ":
                     return True
         else:
@@ -511,7 +513,7 @@ class Player:
     
     def other_battleships_upwards(self, i, j, ship_len):
         if j - ship_len >= -1:
-            for row in range(j - ship_len + 1, j):
+            for row in range(j - ship_len + 1, j + 1):
                 if not self.board[row][i] == " ":
                     return True
         else:
