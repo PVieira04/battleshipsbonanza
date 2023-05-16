@@ -133,9 +133,9 @@ Once these have been implemented, production will then work on these features in
 
 Two different flow charts were created for this project. One was simpler and only included the first four features. The more complex version implements all fatures.
 
-Simple Version:
+![Simple Version](./static/images/flowchart-simple.png)
 
-Complex Version:
+![Complex Version](./static/images/flowchart-complex.png)
 
 ### Skeleton
 
@@ -143,9 +143,15 @@ The Skeleton Frame involves a mockup of how things would look to the user. As th
 
 User Battleship Placements:
 
+![User Battleship Placements](./static/images/skeleton-battleship-placement.png)
+
 Computer Deployments:
 
+![Computer Deployments](./static/images/skeleton-computer-deployments.png)
+
 User Board:
+
+![User Board](./static/images/skeleton-user-board.png)
 
 ### Surface
 
