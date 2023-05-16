@@ -51,9 +51,19 @@ class Game:
         print("")
         print("Developed by Patrick Vieira")
         print("")
+        print("This game of battleships is a two player game. You will be facing off against the computer.")
+        print("Both you and the computer will take turns guessing where each other's battleships are located.")
+        print("The first player to find all of their opponent's battleships is the winner.")
+        print("You will have the option of picking from different board sizes.")
+        print("You will also have the option to place battleships on your board yourself,")
+        print("or you can choose to generate a random board for a quicker start.")
+        print("")
+        print("Please follow the instructions given at each stage, and I hope you enjoy the game!")
         Game.main_menu()
     
     def main_menu():
+        print("")
+        print("Main Menu")
         print("")
         while True:
             command = input("Type 'play' to play the game or 'exit' to exit: ")
@@ -77,8 +87,9 @@ class Game:
     def ask_user_for_board_size():
         print("")
         print("The following prompt will accept any number between 4 and 9 inclusive.")
-        print("This will set the size of the board, for example:")
-        print("Entering '4' will set the board to a 4 by 4 square.")
+        print("This will set the size of the board. For example:")
+        print("Entering '4' will set the board to a 4 by 4 grid...")
+        print("and entering '8' will set the board to an 8 by 8 grid.")
         while True:
             print("")
             try:
@@ -90,20 +101,37 @@ class Game:
                 print("Invalid input. Please enter a number between 4 and 9 inclusive.")
     
     def ask_user_for_random_or_manual_placement_of_battlships(user, comp):
+        print("")
+        print("You now have the option to place battleships on your board yourself,")
+        print("or ask the program to set a random one for you.")
+        print("Don't worry! Even if the computer makes it up for you,")
+        print("your opponent doesn't know where your battleships are! :)")
         while True:
             print("")
             string = input("Type 'random' for random battleship placement or type 'manual' to place them yourself: ")
             if string == 'random':
                 Game.random_placement(user, comp)
             elif string == 'manual':
-                Game.manual_placement(user, comp)
+                Game.manual_placement_welcome(user, comp)
             else:
                 print("Invalid input, please try again.")
     
     def random_placement(user, comp):
         battleship_locations = user.random_battleship_placement()
-        print(f"Battleship Locations: {battleship_locations}")
+        print("")
+        print("Thank you for your selection. Generating random game board...")
+        print("")
         Game.set_computer_game_board(user, comp)
+
+    def manual_placement_welcome(user, comp):
+        print("")
+        print("Placing battleships manually.")
+        print("")
+        print("You will be asked to enter the name of the cell where you would like one end of the battleship to start at.")
+        print("Then, depending on the possible orientations from that position, you will be asked to enter further information.")
+        print("For example: if the battleship can be placed horizontally or vertically, you can specify this.")
+        print("If the battleship can be placed horizontally, facing left or right, you can also specify this.")
+        Game.manual_placement(user, comp)
     
     def manual_placement(user, comp):
         battleship_instances = Battleship.get_all_instances()
@@ -117,7 +145,8 @@ class Game:
             # Variable 'positions' is a list of cell names, e.g. ["A1", "B1", ...] etc.
             positions = user.calculate_available_battleship_positions(battleship.len)
             # When printing my variable 'positions', I could use a function to return a string - better readability.
-            print(f"The {battleship.name}'s position can start from the following cells: {positions}")
+            print(f"The {battleship.name} is a battleship that takes up {battleship.len} cells.")
+            print(f"The {battleship.name}'s position can start from the following cells: {positions}.")
             while True:
                 print("")
                 user_input = input(f"Type the name of the cell you would like your {battleship.name} to start at: ")
@@ -228,7 +257,7 @@ class Game:
         Game.set_computer_game_board(user, comp)
     
     def set_computer_game_board(user, comp):
-        print("Setting up Computer Board")
+        print("Setting up Computer Board:")
         battleship_locations = comp.random_battleship_placement()
         Game.main_game_loop(user, comp)
 
@@ -377,43 +406,33 @@ class Player:
         if self.board_size > 7:
             print("Placing Leviathan")
             battleship_locations = self.place_random_battleship(battleship_locations, self.leviathan_len)
-            print(f"Current {battleship_locations}")
         if self.board_size > 6:
             print("Placing Kraken")
             battleship_locations = self.place_random_battleship(battleship_locations, self.kraken_len)
-            print(f"Current {battleship_locations}")
         if self.board_size > 5:
             print("Placing Titan")
             battleship_locations = self.place_random_battleship(battleship_locations, self.titan_len)
-            print(f"Current {battleship_locations}")
         if self.board_size > 4:
             print("Placing Ravana")
             battleship_locations = self.place_random_battleship(battleship_locations, self.ravana_len)
-            print(f"Current {battleship_locations}")
         if self.board_size == 9:
             print("Placing Ravana")
             battleship_locations = self.place_random_battleship(battleship_locations, self.ravana_len)
-            print(f"Current {battleship_locations}")
         if self.board_size > 3:
             print("Placing Zurvan")
             battleship_locations = self.place_random_battleship(battleship_locations, self.zurvan_len)
-            print(f"Current {battleship_locations}")
         if self.board_size == 9:
             print("Placing Zurvan")
             battleship_locations = self.place_random_battleship(battleship_locations, self.zurvan_len)
-            print(f"Current {battleship_locations}")
         if self.board_size > 3:
             print("Placing Sephirot")
             battleship_locations = self.place_random_battleship(battleship_locations, self.sephirot_len)
-            print(f"Current {battleship_locations}")
         if self.board_size > 3:
             print("Placing Sephirot")
             battleship_locations = self.place_random_battleship(battleship_locations, self.sephirot_len)
-            print(f"Current {battleship_locations}")
         if self.board_size == 9:
             print("Placing Sephirot")
             battleship_locations = self.place_random_battleship(battleship_locations, self.sephirot_len)
-            print(f"Current {battleship_locations}")
         return battleship_locations
 
     def place_random_battleship(self, battleship_locations, ship_len):
