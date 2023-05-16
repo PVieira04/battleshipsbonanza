@@ -165,6 +165,10 @@ As the surface is exclusively limited to the terminal, only a small amount can b
 
 ### Languages
 
+As this project is based off a Code Institute template, there are various languages utilised in order to get rum.py to show in a browser.
+
+However, the only code I have written is in Python, located in run.py of the root directory.
+
 
 ## Design
 
