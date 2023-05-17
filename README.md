@@ -2,6 +2,8 @@
 
 Battleships Bonanza is a terminal-based game where users can play a game of battleships.
 
+[This project is now live on Render](https://battleships-bonanza.onrender.com)
+
 Developed by Patrick Vieira
 
 
@@ -285,5 +287,28 @@ Using this concept, varying game difficulties could be implemented where the ori
 ## Testing
 
 ## Deployment
+
+This project was deployed on render.
+
+The deployment process was as follows:
+
+1. Log in to render.com
+2. Click "New +"
+3. Click "Web Service"
+4. Search for the repository to deploy and click "Connect"
+5. Add a Name for the web service
+6. Ensure 'Evironment' is set to 'Python 3'
+7. Ensure 'Region' is set to 'Frankfurt (EU Central)
+8. Ensure 'Branch' is set to 'main'
+9. Set the Build Command to 'pip install -r requirements.txt && npm install
+10. Set the Start Command to 'node index.js'
+11. Ensure the 'free' plan is selected.
+12. Click on 'Advanced' and then 'Add Environment Variable'
+13. Enter the key 'PORT' with a value of '8000'
+14. Enter the key 'PYTHON_VERSION' with a value of '3.10.7'
+15. Set 'Auto-Deploy' to 'Yes'
+16. Click 'Create Web Service'
+
+Once deployment is complete, the provided link will allow anyone to visit the deployed project.
 
 ## Credits
