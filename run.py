@@ -51,11 +51,11 @@ class Game:
         Prints a welcome message to the user and waits for the user to press Enter
         before moving onto the main menu.
 
-        Parameters:
-                None.
+                Parameters:
+                        None.
 
-        Returns:
-                Nothing.
+                Returns:
+                        Nothing.
         """
         print(" Welcome to Battleships Bonanza!")
         print("")
@@ -108,7 +108,7 @@ class Game:
                 print(" Invalid command. Please try again.")
                 print("")
 
-    def run_game(self):
+    def run_game():
         """
         Creates two instances of the Player class.
         One is the user and the other is the computer.
@@ -189,6 +189,7 @@ class Game:
         """
         Calls the functions which sets the computer game board,
         and gives a message to the user to inform them of changes.
+        
                 Parameters:
                         user (obj): instance of the Person Class
                         comp (obj): instance of the Person Class
@@ -205,18 +206,19 @@ class Game:
 
     def manual_placement_welcome(user, comp):
         """
-        Parameters:
-                user (obj): instance of the Person Class
-                comp (obj): instance of the Person Class
+        Introduces the user to the Manual Placement mode.
 
-        Returns:
-                Nothing.
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        Nothing.
         """
         print("\n" * 8, end="")
         print(" Placing battleships manually.")
         print("")
-        print(
-            " You will now be asked to enter the name of the cell where you would like one")
+        print(" You will now be asked to enter the name of the cell where you would like one")
         print(" end of the battleship to start at. Then, depending on the possible")
         print(" orientations from that position, you will be asked to enter further")
         print(" information.")
@@ -231,6 +233,16 @@ class Game:
         Game.manual_placement(user, comp)
 
     def manual_placement(user, comp):
+        """
+        Allows the user to enter the cells they wish to populate with battleships.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        Nothing.
+        """
         battleship_instances = Battleship.get_all_instances()
         for battleship in battleship_instances:
             # Check if battleship can be placed on board
@@ -393,8 +405,19 @@ class Game:
         Game.set_computer_game_board(user, comp)
 
     def set_computer_game_board(user, comp):
+        """
+        Calls the random battleship placement function from comp and 
+        prepares the user for the next stage through print statements.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        Nothing.
+        """
         print(" Setting up Computer Board....")
-        battleship_locations = comp.random_battleship_placement()
+        comp.random_battleship_placement()
         print(" Done!")
         print("")
         print(" All game boards have been generated.")
@@ -406,25 +429,53 @@ class Game:
         Game.main_game_loop(user, comp)
 
     def main_game_loop(user, comp):
+        """
+        Organises the methods used for the main game loop. Function is exited
+        upon triggering the win condition.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        Nothing.
+        """
         # The main game loop runs here. Only exits with winning condition.
         while True:
-            Game.display_game_boards(user, comp)
+            Game.display_game_boards(user)
             bomb = Game.ask_user_to_deploy_bombs(user)
             Game.handle_bomb_deployment(user, comp, bomb)
             if (user.check_win_condition(comp)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
-            # time.sleep(2)
             Game.comp_makes_a_move(user, comp)
             if (comp.check_win_condition(user)):
                 Game.ask_if_user_wishes_to_play_again(user, comp)
-            # time.sleep(2)
 
-    def display_game_boards(user, comp):
+    def display_game_boards(user):
+        """
+        Calls the print board function from the user object.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        Nothing.
+        """
         print("\n" * (11 - user.board_size), end="")
         user.print_board()
 
     def ask_user_to_deploy_bombs(user):
-        # Ask user for input.
+        """
+        Allows user to submit their choice of where to attack.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        stripped_bomb (str): user input with whitespace stripped
+        """
         while (True):
             bomb_location = input(
                 " Type where you would like to place your bomb (e.g. A1): ")
@@ -432,61 +483,91 @@ class Game:
             if (Game.validate_bomb_deployment(stripped_bomb, user)):
                 # Go to handle_bomb_deployment.
                 return stripped_bomb
-            else:
-                print(" Please try again.")
-                print("")
+            print(" Please try again.")
+            print("")
 
-    def validate_bomb_deployment(bomb, user):
+    def validate_bomb_deployment(bomb: str, user):
+        """
+        Returns True or False depending on user input carried forward
+        from previous function.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        True
+                        False
+        """
         if (len(bomb) != 2):
-            print(f' Invalid input. String must be 2 characters long.')
+            print(" Invalid input. String must be 2 characters long.")
             return False
 
-        if (bomb[0].isalpha() == False):
-            print(
-                f' Invalid input. The first character must be a letter ranging from A to F.')
+        if (bomb[0].isalpha() is False):
+            print(" Invalid input. The first character must be a letter ranging from A to F.")
             return False
 
         if (ord(bomb[0].upper()) < 65 or ord(bomb[0].upper()) > 65 + len(user.board)):
-            print(
-                f' Invalid input. The first character must be a letter ranging from A to F.')
+            print(" Invalid input. The first character must be a letter ranging from A to F.")
             return False
 
-        if (bomb[1].isnumeric() == False):
-            print(
-                f' Invalid input. The second character must be a number between 1 and {len(user.board)}.')
+        if (bomb[1].isnumeric() is False):
+            print(f' Invalid input. The second character must be a number between 1 and {len(user.board)}.')
             return False
 
         if (int(bomb[1]) < 1 or int(bomb[1]) > len(user.board)):
-            print(
-                f' Invalid input. The second character must be a number between 1 and {len(user.board)}.')
+            print(f' Invalid input. The second character must be a number between 1 and {len(user.board)}.')
             return False
 
-        # I could also check to see if the user has already deployed a bomb at that location but that's a skill issue imo.
-
-        else:
-            return True
+        return True
 
     def handle_bomb_deployment(user, comp, bomb):
-        # Logic to update comp game board.
+        """
+        Calls the update game board function and passes in the 
+        coordinates of the cell defined in 'bomb'.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+                        bomb (str): stripped version of the user input from previous function
+
+                Returns:
+                        Nothing.
+        """
         print("")
-        print(
-            f" Approved. The bomb will now be deployed at {bomb[0].upper()}{bomb[1]}.")
+        print(f" Approved. The bomb will now be deployed at {bomb[0].upper()}{bomb[1]}.")
         i = ord(bomb[0].upper()) - 65
         j = int(bomb[1]) - 1
         user.update_game_board(comp, i, j)
-        return
 
     def comp_makes_a_move(user, comp):
-        # Computer to do a move.
+        """
+        Calls functions to randomly select a cell to attack.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+
+                Returns:
+                        Nothing.
+        """
         computer_move = comp.random_move()
         print("")
-        print(
-            f" Computer deploying at {chr(computer_move[0]+65)}{computer_move[1] + 1}.")
+        print(f" Computer deploying at {chr(computer_move[0]+65)}{computer_move[1] + 1}.")
         comp.update_game_board(user, computer_move[0], computer_move[1])
-        return
 
     def ask_if_user_wishes_to_play_again(user, comp):
-        # Ask user if they wish to play the game again.
+        """
+        Allows user to choose what to do once game has ended.
+
+                Parameters:
+                        user (obj): instance of the Person Class
+                        comp (obj): instance of the Person Class
+                        bomb (str): stripped version of the user input from previous function
+
+                Returns:
+                        Nothing.
+        """
         print(" For the next prompt, type 'play' to play again, 'exit' to")
         print(" end the program or 'main' to go back to the main menu.")
         print("")
@@ -509,10 +590,42 @@ class Game:
             else:
                 print(" Invalid input, please try again.")
                 print("")
-        return
 
 
 class Player:
+    """
+    A class to represent a player.
+
+    ...
+
+    Attributes
+    ----------
+    name : str
+        name of the player
+    board_size : int
+        size of the board
+    board : List
+        the nested list containing battleships and bombs
+    deployments : List
+        the nested list containing only deployed bombs
+    leviathan_num : int
+        number of Leviathan battleships needed for this size of board
+    kraken_num : int
+        number of Kraken battleships needed for this size of board
+    titan_num : int
+        number of Titan battleships needed for this size of board
+    ravana_num : int
+        number of Ravana battleships needed for this size of board
+    zurvan_num : int
+        number of Zurvan battleships needed for this size of board
+    sephirot_num : int
+        number of Sephirot battleships needed for this size of board
+
+    Methods
+    -------
+    set_board_size(size):
+        Sets up the correct sized board for the player
+    """
     leviathan_len = 7
     kraken_len = 6
     titan_len = 5
@@ -804,9 +917,8 @@ class Player:
             j = random.randint(0, len(self.board) - 1)
             if self.deployments[j][i] in ["X", "O"]:
                 continue
-            else:
-                computer_move = [i, j]
-                return computer_move
+            computer_move = [i, j]
+            return computer_move
 
     def check_win_condition(self, other):
         if any(char in ['L', 'K', 'T', 'R', 'Z', 'S'] for sublist in other.board for char in sublist):
