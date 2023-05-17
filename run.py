@@ -65,11 +65,12 @@ class Game:
         print("")
         print(" Please follow the instructions given at each stage, and I hope you enjoy the")
         print(" game!")
+        print("")
+        input(" Press the 'Enter' key to continue to the main menu. ")
         Game.main_menu()
     
     def main_menu():
-        print("")
-        print("")
+        print("\n" * 12, end="")
         print(" Main Menu")
         print("")
         while True:
@@ -92,11 +93,9 @@ class Game:
         return
 
     def ask_user_for_board_size():
-        print("")
-        print("")
-        print("")
+        print("\n" * 9, end="")
         print(" Board Size Selection")
-        print("")
+        print("\n" * 2, end="")
         print(" You can now set the size of the board you wish to play. For example:")
         print(" Entering '4' will set the board to a 4 by 4 grid...")
         print(" and entering '8' will set the board to an 8 by 8 grid.")
@@ -106,7 +105,7 @@ class Game:
         while True:
             print("")
             try:
-                size = int(input(" What size of board would you like? "))
+                size = int(input(" Board size: "))
                 if size not in range(4, 10):
                     raise ValueError(" Invalid input. Please enter a number between 4 and 9 inclusive.")
                 return size
@@ -114,11 +113,9 @@ class Game:
                 print(" Invalid input. Please enter a number between 4 and 9 inclusive.")
     
     def ask_user_for_random_or_manual_placement_of_battlships(user, comp):
-        print("")
-        print("")
-        print("")
+        print("\n" * 14, end="")
         print(" Battleship Placement Method")
-        print("")
+        print("\n" * 2, end="")
         print(" You now have the option to place battleships on the board yourself, or ask")
         print(" the program to set a random one for you. Don't worry! Even if the computer")
         print(" makes it up for you, your opponent doesn't know where your battleships are! :)")
@@ -143,18 +140,21 @@ class Game:
         Game.set_computer_game_board(user, comp)
 
     def manual_placement_welcome(user, comp):
-        print("")
-        print("")
-        print("")
+        print("\n" * 8, end="")
         print(" Placing battleships manually.")
         print("")
         print(" You will now be asked to enter the name of the cell where you would like one")
         print(" end of the battleship to start at. Then, depending on the possible")
         print(" orientations from that position, you will be asked to enter further")
-        print(" information. For example: if the battleship could be placed horizontally or")
-        print(" vertically, you must specify this. If the battleship could be placed")
-        print(" horizontally, facing left or right, you must also specify this.")
+        print(" information.")
+        print("")
+        print(" For example: if the battleship could be placed horizontally or vertically,")
+        print(" you must specify this. If the battleship could be placed horizontally,")
+        print(" facing left or right, you must also specify this.")
+        print("")
         print(" The game will ask you to specify if needed.")
+        print("")
+        input(" Press the 'Enter' key to continue. ")
         Game.manual_placement(user, comp)
     
     def manual_placement(user, comp):
@@ -164,6 +164,7 @@ class Game:
             if not user.battleship_can_be_placed_on_board(battleship.len, battleship.version):
                 continue
             print("")
+            print("\n" * (11 - user.board_size), end="")
             user.print_board()
             print("")
             # Variable 'positions' is a list of cell names, e.g. ["A1", "B1", ...] etc.
@@ -302,8 +303,8 @@ class Game:
             #time.sleep(2)
 
     def display_game_boards(user, comp):
+        print("\n" * (11 - user.board_size), end="")
         user.print_board()
-        #comp.print_board()
     
     def ask_user_to_deploy_bombs(user):
         # Ask user for input.
