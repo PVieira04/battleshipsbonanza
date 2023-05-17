@@ -625,6 +625,68 @@ class Player:
     -------
     set_board_size(size):
         Sets up the correct sized board for the player
+    set_number_of_leviathan():
+        Sets up the correct number of Leviathan battleships based on board size.
+    set_number_of_kraken():
+        Sets up the correct number of Kraken battleships based on board size.
+    set_number_of_titan():
+        Sets up the correct number of Titan battleships based on board size.
+    set_number_of_ravana():
+        Sets up the correct number of Ravana battleships based on board size.
+    set_number_of_zurvan():
+        Sets up the correct number of Zurvan battleships based on board size.
+    set_number_of_sephirot():
+        Sets up the correct number of Sephirot battleships based on board size.
+    random_battleship_placement():
+        Iterates through all battleships and calls functions to add them to the game board.
+    place_random_battleship(battleship_locations, ship_len):
+        Adds coordinates occupied by a bettleship to battleship_locations and returns it.
+    add_locations_to_game_board(battleship_locations, ship_len):
+        Iterates through all game board elements and adds the correct battleship characterto represent it.
+    print_battleship_character(ship_len):
+        Returns the battleship character based on the ship length.
+    calculate_available_battleship_positions(self, ship_len):
+        Iterates through the game board and returns a list of all cells the battleship can start from.
+    other_battleships_to_the_right(self, i, j, ship_len):
+        Calculates whether there are other battleships to the right of a position on the board.
+    other_battleships_to_the_left(self, i, j, ship_len):
+        Calculates whether there are other battleships to the left of a position on the board.
+    other_battleships_downwards(self, i, j, ship_len):
+        Calculates whether there are other battleships downwards of a position on the board.
+    other_battleships_upwards=(self, i, j, ship_len):
+        Calculates whether there are other battleships upwards of a position on the board.
+    battleship_can_be_placed_horizontally(self, i, j, ship_len):
+        Calculates whether a bettleship can be placed horizontally or not.
+    battleship_can_be_placed_vertically(self, i, j, ship_len):
+        Calculates whether a bettleship can be placed vertically or not.
+    battleship_can_be_placed_facing_right(self, i, j, ship_len):
+        Calculates whether a bettleship can be placed facing right from its current position.
+    battleship_can_be_placed_facing_left(self, i, j, ship_len):
+        Calculates whether a bettleship can be placed facing left from its current position.
+    battleship_can_be_placed_facing_down(self, i, j, ship_len):
+        Calculates whether a bettleship can be placed facing down from its current position.
+    battleship_can_be_placed_facing_up(self, i, j, ship_len):
+        Calculates whether a bettleship can be placed facing up from its current position.
+    convert_coordinate_to_cell_name(i, j):
+        Converts the coordinates of a cell to its cell name.
+    convert_cell_name_to_coordinate(cell):
+        Converts a position's cell name to its coordinates.
+    battleship_can_be_placed_on_board(self, length, version):
+        Calculates whether the battleship in question should be placed on the board of the given size.
+    manual_battleship_placement(self, cell, direction, char, length):
+        Replaces the elements on the game board with the character for the correct battleship.
+    print_available_positions(locations):
+        Displays the avilable starting positions of the battleship in question in a clear and easily visible manner.
+    print_board(self):
+        Display's a Player's board and deployments to the terminal side by side.
+    print_column_headers(self):
+        Returns a string containing the column headers based on the size of the board.
+    update_game_board(self, other, i, j):
+        Updates the opponent's game board and user's deployments depending on given coordinates.
+    random_move(self):
+        Returns the coordinates of the computer's next attacking location that it hasn't previously targeted.
+    check_win_condition(self, other):
+        Checks to see whether any battleship characters are left on the opponent's board.
     """
     leviathan_len = 7
     kraken_len = 6
@@ -646,27 +708,100 @@ class Player:
         self.sephirot_num = self.set_number_of_sephirot()
 
     def set_board_size(self, size):
+        """
+        Sets up the correct sized board for the player
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        a nested List with each element containing a space.
+        """
         return [[' ' for _ in range(size)] for _ in range(size)]
 
     def set_number_of_leviathan(self):
+        """
+        Sets up the correct number of Leviathan battleships based on board size.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        int
+        """
         return 1 if self.board_size > 7 else 0
 
     def set_number_of_kraken(self):
+        """
+        Sets up the correct number of Kraken battleships based on board size.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        int
+        """
         return 1 if self.board_size > 6 else 0
 
     def set_number_of_titan(self):
+        """
+        Sets up the correct number of Titan battleships based on board size.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        int
+        """
         return 1 if self.board_size > 5 else 0
 
     def set_number_of_ravana(self):
+        """
+        Sets up the correct number of Ravana battleships based on board size.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        int
+        """
         return 2 if self.board_size > 8 else 1 if self.board_size > 4 else 0
 
     def set_number_of_zurvan(self):
+        """
+        Sets up the correct number of Zurvan battleships based on board size.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        int
+        """
         return 2 if self.board_size > 8 else 1
 
     def set_number_of_sephirot(self):
+        """
+        Sets up the correct number of Sephirot battleships based on board size.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        int
+        """
         return 3 if self.board_size > 8 else 2
 
     def random_battleship_placement(self):
+        """
+        Iterates through all battleships and calls functions to add
+        them to the game board.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        Nothing.
+        """
         battleship_locations = []
         if self.board_size > 7:
             battleship_locations = self.place_random_battleship(
@@ -700,6 +835,17 @@ class Player:
                 battleship_locations, self.sephirot_len)
 
     def place_random_battleship(self, battleship_locations, ship_len):
+        """
+        Adds coordinates occupied by a bettleship to battleship_locations
+        and returns it.
+        
+                Parameters:
+                        battleship_locations (List) : list of coordinates occupied by battleships
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        battleship_locations (List) : list of coordinates occupied by battleships
+        """
         while True:
             i = random.randint(0, self.board_size - 1)
             j = random.randint(0, self.board_size - 1)
@@ -720,36 +866,63 @@ class Player:
                     location_already_exists = True
                     break
                 new_ship.append(new_location)
-            if location_already_exists == False:
+            if location_already_exists is False:
                 for coordinate in new_ship:
                     battleship_locations.append(coordinate)
                 self.add_locations_to_game_board(new_ship, ship_len)
                 return battleship_locations
-            else:
-                continue
+            continue
 
     def add_locations_to_game_board(self, battleship_locations, ship_len):
+        """
+        Iterates through all game board elements and adds the correct
+        battleship character to represent it.
+        
+                Parameters:
+                        battleship_locations (List) : list of coordinates occupied by battleships
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        Nothing.
+        """
         for j, sub_array in enumerate(self.board):
             for i, element in enumerate(sub_array):
                 if ([i, j] in battleship_locations):
-                    self.board[j][i] = Player.print_battleship_character(
-                        ship_len)
+                    self.board[j][i] = Player.print_battleship_character(ship_len)
 
     def print_battleship_character(ship_len):
+        """
+        Returns the battleship character based on the ship length.
+        
+                Parameters:
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        str of length 1.
+        """
         if ship_len == 7:
             return "L"
-        elif ship_len == 6:
+        if ship_len == 6:
             return "K"
-        elif ship_len == 5:
+        if ship_len == 5:
             return "T"
-        elif ship_len == 4:
+        if ship_len == 4:
             return "R"
-        elif ship_len == 3:
+        if ship_len == 3:
             return "Z"
-        else:
-            return "S"
+        return "S"
 
     def calculate_available_battleship_positions(self, ship_len):
+        """
+        Iterates through the game board and returns a list of
+        all cells the battleship can start from.
+        
+                Parameters:
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        available_positions (List) : a list containing cell names of abilable positions.
+        """
         # In this method, I want to be able to calculate all available positions for any battleship.
         # Define an empty list
         available_positions = []
@@ -760,7 +933,8 @@ class Player:
                 if element == " ":
                     # Run a check to see if ship of a certain length can be placed there.
                     # Run the check both horizontally and vertically, and in both directions.
-                    # Run a further check to see if another ship is blocking our path
+                    # Run a further check to see if another ship is blocking our path.
+                    # If the area is free, add the cell name to the available_positions list.
                     if not self.other_battleships_to_the_right(i, j, ship_len):
                         available_positions.append(
                             Player.convert_coordinate_to_cell_name(i, j))
@@ -776,6 +950,17 @@ class Player:
         return available_positions
 
     def other_battleships_to_the_right(self, i, j, ship_len):
+        """
+        Calculates whether there are other battleships to the right of a position on the board.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         if i + ship_len <= self.board_size:
             for col in range(i, i + ship_len):
                 if not self.board[j][col] == " ":
@@ -784,6 +969,17 @@ class Player:
             return True
 
     def other_battleships_to_the_left(self, i, j, ship_len):
+        """
+        Calculates whether there are other battleships to the left of a position on the board.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         if i - ship_len >= -1:
             for col in range(i - ship_len + 1, i + 1):
                 if not self.board[j][col] == " ":
@@ -792,6 +988,17 @@ class Player:
             return True
 
     def other_battleships_downwards(self, i, j, ship_len):
+        """
+        Calculates whether there are other battleships downwards of a position on the board.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         if j + ship_len <= self.board_size:
             for row in range(j, j + ship_len):
                 if not self.board[row][i] == " ":
@@ -800,6 +1007,17 @@ class Player:
             return True
 
     def other_battleships_upwards(self, i, j, ship_len):
+        """
+        Calculates whether there are other battleships upwards of a position on the board.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         if j - ship_len >= -1:
             for row in range(j - ship_len + 1, j + 1):
                 if not self.board[row][i] == " ":
@@ -808,30 +1026,128 @@ class Player:
             return True
 
     def battleship_can_be_placed_horizontally(self, i, j, ship_len):
+        """
+        Calculates whether a bettleship can be placed horizontally or not.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return not (self.other_battleships_to_the_right(i, j, ship_len) and self.other_battleships_to_the_left(i, j, ship_len))
 
     def battleship_can_be_placed_vertically(self, i, j, ship_len):
+        """
+        Calculates whether a bettleship can be placed vertically or not.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return not (self.other_battleships_downwards(i, j, ship_len) and self.other_battleships_upwards(i, j, ship_len))
 
     def battleship_can_be_placed_facing_right(self, i, j, ship_len):
+        """
+        Calculates whether a bettleship can be placed facing right from its current position.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return not (self.other_battleships_to_the_right(i, j, ship_len))
 
     def battleship_can_be_placed_facing_left(self, i, j, ship_len):
+        """
+        Calculates whether a bettleship can be placed facing left from its current position.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return not (self.other_battleships_to_the_left(i, j, ship_len))
 
     def battleship_can_be_placed_facing_down(self, i, j, ship_len):
+        """
+        Calculates whether a bettleship can be placed facing down from its current position.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return not (self.other_battleships_downwards(i, j, ship_len))
 
     def battleship_can_be_placed_facing_up(self, i, j, ship_len):
+        """
+        Calculates whether a bettleship can be placed facing up from its current position.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return not (self.other_battleships_upwards(i, j, ship_len))
 
     def convert_coordinate_to_cell_name(i, j):
+        """
+        Converts the coordinates of a cell to its cell name.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return f"{chr(i + 65)}{j + 1}"
 
     def convert_cell_name_to_coordinate(cell):
+        """
+        Converts a position's cell name to its coordinates.
+        
+                Parameters:
+                        i (int) : x coordinate of board
+                        j (int) : y coordinate of board
+                        ship_len (int) : length of the ship being added to the board
+                
+                Return:
+                        True or False
+        """
         return ord(cell[0]) - 65, int(cell[1]) - 1
 
     def battleship_can_be_placed_on_board(self, length, version):
+        """
+        Calculates whether the battleship in question should be placed on the board of the given size.
+        
+                Parameters:
+                        length (int) : length of the ship being added to the board
+                        version (int) : version of the battleship being added to the board
+                
+                Return:
+                        True or False
+        """
         return length == 7 and self.board_size > 7 \
             or length == 6 and self.board_size > 6 \
             or length == 5 and self.board_size > 5 \
@@ -843,6 +1159,18 @@ class Player:
             or length == 2 and self.board_size == 9 and version == 3
 
     def manual_battleship_placement(self, cell, direction, char, length):
+        """
+        Replaces the elements on the game board with the character for the correct battleship.
+        
+                Parameters:
+                        cell (str) : The cell name of the battleship's starting position.
+                        direction (str) : The direction the battleship is facing.
+                        char (str) : The charater that represents the battleship being added to the board.
+                        length (int) : The length of the battleship being added to the board.
+                
+                Return:
+                        Nothing.
+        """
         i, j = Player.convert_cell_name_to_coordinate(cell)
         for count in range(length):
             if direction == 'r':
@@ -853,9 +1181,17 @@ class Player:
                 self.board[j + count][i] = char
             elif direction == 'u':
                 self.board[j - count][i] = char
-        return
 
     def print_available_positions(locations):
+        """
+        Displays the avilable starting positions of the battleship in question in a clear and easily visible manner.
+        
+                Parameters:
+                        locations (List) : Contains the avilable starting positions of the battleship in question.
+                
+                Return:
+                        Nothing.
+        """
         terminal_width = 80
         print(" ", end="")
         line_width = 1
@@ -879,6 +1215,15 @@ class Player:
         print("")
 
     def print_board(self):
+        """
+        Display's a Player's board and deployments to the terminal side by side.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        Nothing.
+        """
         print("")
         print("")
         print(f" {self.name}'s board:      {self.name}'s deployments:")
@@ -891,6 +1236,15 @@ class Player:
         print("")
 
     def print_column_headers(self):
+        """
+        Returns a string containing the column headers based on the size of the board.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        Nothing.
+        """
         string = ""
         for i in range(len(self.board)):
             string += chr(65 + i)
@@ -898,20 +1252,40 @@ class Player:
         return string
 
     def update_game_board(self, other, i, j):
+        """
+        Updates the opponent's game board and user's deployments depending on given coordinates.
+        
+                Parameters:
+                        other (obj) : The object of the opponent.
+                        i (int) : The x coordinate of the chosen location
+                        j (int) : The y coordinate of the chosen location
+                
+                Return:
+                        Nothing.
+        """
         if other.board[j][i] in ["X", "O"]:
             print(f" {self.name} has already deployed a bomb at this location")
             print("")
             return
-        elif (other.board[j][i] == " "):
+        if (other.board[j][i] == " "):
             print(f" {self.name} missed.")
             other.board[j][i] = "X"
-        elif (other.board[j][i] in ["L", "K", "T", "R", "Z", "S"]):
+        if (other.board[j][i] in ["L", "K", "T", "R", "Z", "S"]):
             print(" It's a hit!")
             other.board[j][i] = "O"
         self.deployments[j][i] = other.board[j][i]
         return
 
     def random_move(self):
+        """
+        Returns the coordinates of the computer's next attacking location that it hasn't previously targeted.
+        
+                Parameters:
+                        None.
+                
+                Return:
+                        computer_move (List) : A list containing the coordinates of the computer's chosen location to attack.
+        """
         while True:
             i = random.randint(0, len(self.board) - 1)
             j = random.randint(0, len(self.board) - 1)
@@ -921,39 +1295,99 @@ class Player:
             return computer_move
 
     def check_win_condition(self, other):
+        """
+        Checks to see whether any battleship characters are left on the opponent's board.
+        
+                Parameters:
+                        other (obj) : The object of the opponent.
+                
+                Return:
+                        True or False
+        """
         if any(char in ['L', 'K', 'T', 'R', 'Z', 'S'] for sublist in other.board for char in sublist):
             return False
-        else:
-            self.print_board()
-            other.print_board()
-            print(f' Game Over! {self.name} wins!!')
-            print("")
-            return True
+        self.print_board()
+        other.print_board()
+        print(f' Game Over! {self.name} wins!!')
+        print("")
+        return True
 
 
 class Battleship:
+    """
+    A class to represent a battleship.
+
+    ...
+
+    Attributes
+    ----------
+    name : str
+        name of the battleship
+    length : int
+        how many cells the battleship takes up
+    char : str
+        what character represents the battleship on the board
+    version : int
+        what instance of the same battleship is it
+    compatible_boards : List
+        list of integers representing what board sizes that battleship can be placed on
+    
+    Methods
+    -------
+    get_all_instances():
+        Returns the all_instances class variable containing all instanced objects.
+    """
     all_instances = []
 
-    def __init__(self, name, length, char, version):
+    def __init__(self, name, length, char, version, compatible_boards):
+        """
+        Constructs all the necessary attributes for the Battleship object.
+        
+        Parameters
+        ----------
+            name : str
+                name of the battleship
+            length : int
+                how many cells the battleship takes up
+            char : str
+                what character represents the battleship on the board
+            version : int
+                what instance of the same battleship is it
+            compatible_boards : List
+                list of integers representing what board sizes that battleship can be placed on
+        """
         self.name = name
         self.len = length
         self.char = char
         self.version = version
+        self.compatible_boards = compatible_boards
         Battleship.all_instances.append(self)
 
     def get_all_instances():
+        """
+        Returns the all_instances class variable containing all instanced objects.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+            all_instances : List
+                List containing all instanced battleship objects
+        """
         return Battleship.all_instances
 
 
-leviathan = Battleship("Leviathan", 7, "L", 1)
-kraken = Battleship("Kraken", 6, "K", 1)
-titan = Battleship("Titan", 5, "T", 1)
-ravana1 = Battleship("Ravana", 4, "R", 1)
-ravana2 = Battleship("Ravana", 4, "R", 2)
-zurvan1 = Battleship("Zurvan", 3, "Z", 1)
-zurvan2 = Battleship("Zurvan", 3, "Z", 2)
-sephirot1 = Battleship("Sephirot", 2, "S", 1)
-sephirot2 = Battleship("Sephirot", 2, "S", 2)
-sephirot3 = Battleship("Sephirot", 2, "S", 3)
+leviathan = Battleship("Leviathan", 7, "L", 1, [8, 9])
+kraken = Battleship("Kraken", 6, "K", 1, [7, 8, 9])
+titan = Battleship("Titan", 5, "T", 1, [6, 7, 8, 9])
+ravana1 = Battleship("Ravana", 4, "R", 1, [5, 6, 7, 8, 9])
+ravana2 = Battleship("Ravana", 4, "R", 2, [9])
+zurvan1 = Battleship("Zurvan", 3, "Z", 1, [4, 5, 6, 7, 8, 9])
+zurvan2 = Battleship("Zurvan", 3, "Z", 2, [9])
+sephirot1 = Battleship("Sephirot", 2, "S", 1, [4, 5, 6, 7, 8, 9])
+sephirot2 = Battleship("Sephirot", 2, "S", 2, [4, 5, 6, 7, 8, 9])
+sephirot3 = Battleship("Sephirot", 2, "S", 3, [9])
 
 Game.welcome_to_the_game()
