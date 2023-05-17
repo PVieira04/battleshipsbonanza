@@ -286,6 +286,9 @@ Using this concept, varying game difficulties could be implemented where the ori
 
 ## Testing
 
+1. Manual Testing
+2. PEP8 Linter
+
 ## Deployment
 
 This project was deployed on render.
