@@ -50,7 +50,7 @@ class Game:
         print(" Welcome to Battleships Bonanza!")
         print("")
         print(" Developed by Patrick Vieira")
-        print("")
+        print("\n" * 2, end="")
         print(" This game of battleships is a two player game. You will be facing off against")
         print(" the computer. Both you and the computer will take turns guessing where each")
         print(" other's battleships are located. The first player to find all of their")
@@ -62,15 +62,15 @@ class Game:
         print(" You will have the option of picking from different board sizes. You will also")
         print(" have the option to place battleships on your board yourself, or you can choose")
         print(" to generate a random board for a quicker start.")
-        print("")
+        print("\n" * 2, end="")
         print(" Please follow the instructions given at each stage, and I hope you enjoy the")
         print(" game!")
-        print("")
+        print("\n" * 2, end="")
         input(" Press the 'Enter' key to continue to the main menu. ")
         Game.main_menu()
     
     def main_menu():
-        print("\n" * 12, end="")
+        print("\n" * 14, end="")
         print(" Main Menu")
         print("")
         while True:
@@ -121,7 +121,7 @@ class Game:
         print(" makes it up for you, your opponent doesn't know where your battleships are! :)")
         while True:
             print("")
-            string = input(" Type 'r' for random battleship placement or type 'm' to place them yourself: ")
+            string = input(" Type 'r' for random or 'm' for manual: ")
             if string == 'r':
                 Game.random_placement(user, comp)
             elif string == 'm':
@@ -131,9 +131,7 @@ class Game:
     
     def random_placement(user, comp):
         battleship_locations = user.random_battleship_placement()
-        print("")
-        print("")
-        print("")
+        print("\n" * 10, end="")
         print(" Thank you for your selection. Generating random game board...")
         print(" Done!")
         print("")
@@ -170,7 +168,9 @@ class Game:
             # Variable 'positions' is a list of cell names, e.g. ["A1", "B1", ...] etc.
             positions = user.calculate_available_battleship_positions(battleship.len)
             # When printing my variable 'positions', I could use a function to return a string - better readability.
-            print(f" The {battleship.name} is a battleship that takes up {battleship.len} cells.")
+            print(f" Now, it's your turn to strategically position The {battleship.name} battleship.")
+            print(f" This is a battleship that takes up {battleship.len} cells.")
+            print("")
             print(f" The {battleship.name}'s position can start from the following cells:")
             Player.print_available_positions(positions)
             while True:
@@ -203,7 +203,7 @@ class Game:
                         print(f" This {battleship.name} can be placed facing left or right from {user_input}.")
                         while True:
                             print("")
-                            direction = input(f" Type 'l' to face the {battleship.name} left or 'r' to face it right.")
+                            direction = input(f" Type 'l' to face the {battleship.name} left or 'r' to face it right: ")
                             if direction not in ['l', 'r']:
                                 print(" Invalid input. Please try again.")
                                 continue
@@ -224,7 +224,7 @@ class Game:
                         print(f" This {battleship.name} can be placed facing down or up from {user_input}.")
                         while True:
                             print("")
-                            direction = input(f" Type 'd' to face the {battleship.name}down or 'u' to face it up.")
+                            direction = input(f" Type 'd' to face it downwards or 'u' for upwards: ")
                             if direction not in ['d', 'u']:
                                 print(" Invalid input. Please try again.")
                                 continue
@@ -244,7 +244,7 @@ class Game:
                     print(f" This {battleship.name} can be placed facing left or right from {user_input}.")
                     while True:
                         print("")
-                        direction = input(f" Type 'l' to face the {battleship.name} left or 'r' to face it right.")
+                        direction = input(f" Type 'l' to face it left or 'r' to face it right: ")
                         if direction not in ['l', 'r']:
                             continue
                         user.manual_battleship_placement(user_input, direction, battleship.char, battleship.len)
@@ -266,7 +266,7 @@ class Game:
                     print(f" This {battleship.name} can be placed facing down or up from {user_input}.")
                     while True:
                         print("")
-                        direction = input(f" Type 'd' to face the {battleship.name}down or 'u' to face it up.")
+                        direction = input(f" Type 'd' to face it downwards or 'u' for upwards: ")
                         if direction not in ['d', 'u']:
                             print(" Invalid input. Please try again.")
                             continue
@@ -286,6 +286,13 @@ class Game:
         print(" Setting up Computer Board....")
         battleship_locations = comp.random_battleship_placement()
         print(" Done!")
+        print("")
+        print(" All game boards have been generated.")
+        print("")
+        print(" You and the computer will now take turns in guessing where each others'")
+        print(" battleships are located.")
+        print("")
+        input(" Press the 'Enter' key to continue. ")
         Game.main_game_loop(user, comp)
 
     def main_game_loop(user, comp):
@@ -356,6 +363,7 @@ class Game:
     def comp_makes_a_move(user, comp):
         # Computer to do a move.
         computer_move = comp.random_move()
+        print("")
         print(f" Computer deploying at {chr(computer_move[0]+65)}{computer_move[1] + 1}.")
         comp.update_game_board(user, computer_move[0], computer_move[1])
         return
@@ -617,6 +625,12 @@ class Player:
                 print(" ", end="")
                 line_width = 1
                 continue
+            if cell == locations[len(locations) - 2]:
+                print(" and ", end="")
+                continue
+            if cell == locations[len(locations) - 1]:
+                print(".", end="")
+                break
             print(", ", end="")
             line_width += len(cell) + 2
         print("")
