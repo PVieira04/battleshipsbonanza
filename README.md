@@ -133,9 +133,9 @@ Once these have been implemented, production will then work on these features in
 
 Two different flow charts were created for this project. One was simpler and only included the first four features. The more complex version implements all fatures.
 
-![Simple Version](./static/images/flowchart-simple.png)
+![Simple Version](./static/images/planning/flowchart-simple.png)
 
-![Complex Version](./static/images/flowchart-complex.png)
+![Complex Version](./static/images/planning/flowchart-complex.png)
 
 ### Skeleton
 
@@ -143,15 +143,15 @@ The Skeleton Frame involves a mockup of how things would look to the user. As th
 
 User Battleship Placements:
 
-![User Battleship Placements](./static/images/skeleton-battleship-placement.png)
+![User Battleship Placements](./static/images/planning/skeleton-battleship-placement.png)
 
 Computer Deployments:
 
-![Computer Deployments](./static/images/skeleton-computer-deployments.png)
+![Computer Deployments](./static/images/planning/skeleton-computer-deployments.png)
 
 User Board:
 
-![User Board](./static/images/skeleton-user-board.png)
+![User Board](./static/images/planning/skeleton-user-board.png)
 
 ### Surface
 
@@ -181,27 +181,105 @@ However, the only code I have written is in Python, located in run.py of the roo
 
 ### Welcome Message
 
+The program first begins with a message which welcomes the user to the game. A brief description of the game is given as well as an explanation of some features such as being able to specify board size and placing battleships manually.
+
+The user is instructed to press enter.
+
+![welcome-message](./static/images/features/welcome-message.png)
+
 ### Main Menu
 
-### Play Game
+Upon pressing enter, the Main Menu is displayed. The user has the option to enter two commands, 'play' or 'exit'. User input is validated and only accepts these two commands. If anything else is entered, the program will return an error message and ask for the user to try again.
+
+![main-menu-val](./static/images/features/main-menu-val.png)
 
 ### Board Size Selection
 
+Upon entering 'play', the Board Size Selection instructions will be displayed. The user is then encouraged to enter a number from 4 to 9. If the user does not enter a number between 4 and 9, an error message will show and will be asked the question again.
+
+![board-size-selection](./static/images/features/board-size-selection-val.png)
+
 ### Battleship Assignment Method
+
+Upon entering a valid board size, the next section will be displayed which is to decide how battleships will be placed on the user's board. The user has the option to ask the computer to give a random assignment of battleships or to place them manually on the board. If the entered string does not match either 'r' or 'm', an error will be thrown and user will be prompted again.
+
+![battleship-placement](./static/images/features/battleship-placement-method-val.png)
 
 ### Random Assignment
 
+If the user decides to let the computer assign random positions for their battlehsips, this will be completed automatically behind the scenes.
+
+![random-placement](./static/images/features/random-placement.png)
+
 ### Manual Assignment
+
+If the user decides to place battleships on the board themselves, they will be shown the instructions for the section. Upon pressing enter, they will be able to begin assigning positions.
+
+![manual-placement-intro](./static/images/features/manual-placement-intro.png)
+
+The current board will be displayed, along with a list of all the cells where the end of the current battleship can be positioned.
+
+![manual-placement-levi](./static/images/features/manual-placement-levi.png)
+
+User input is fully validated as only the available cells shown in the terminal are valid. If the user enters anything but the cells shown in the terminal, the program will throw an error and the user will be asked again for input.
+
+![manual-placement-levi-val](./static/images/features/manual-placement-levi-val.png)
+
+If the user is able to place the end of the battleship on a cell but with different orientations, the user will be prompted to specify. This input is also fully validated. Several examples are shown:
+
+![manual-placement-levi-options](./static/images/features/manual-placement-levi-options.png)
+
+[Options for Zurvan Battleship](./static/images/features/manual-placement-zurv-options.png)
+
+[Options for Sephirot Battleship](./static/images/features/manual-placement-seph-options.png)
+
+Once the process is complete and all battleships have been placed on the board, a message will be displayed and the user will be asked to press Enter to continue. This takes the user to the Main Game Loop.
+
+![manual-placement-complete](./static/images/features/manual-placement-complete.png)
 
 ### Main Game Loop
 
-### Check Win Condition
+The Main Game Loop is where the game happens. The user and the computer take turns in deploying bombs onto cells in the opponent's field until one field is void of battlehsips.
+
+The user's board and deployments are shown. The user is then prompted for the cell they wish to attack. This input is fully vaildated, and the user is given lots of information regarding the required format of their input.
+
+![main-game-loop-val](./static/images/features/main-game-loop-val.png)
+
+Every time the user or the computer decides on a cell to attack, the program checks whether any other battleships are left on the opponent's board. If there are, play will continue. If not, then it is Game Over.
 
 ### Game Over
 
-### Play Again
+Once the win condition has been triggered, both the user's and computer's game boards will be displayed along with a 'Game Over' message.
+
+The user is then presented with some options. Whether to play again, return to the main menu, or exit.
+
+![game-over](./static/images/features/game-over.png)
+
+### Exit
+
+Upon typing 'exit', the program will run a sys.exit() function which terminates the program.
+
+![exit](./static/images/features/exit.png)
+
+### Features to be Added
+
+1. Google Sheets Leaderboard
+2. Multiple Game Modes
+
+A Google API can be implemented so that run.py can connect with a Google Sheets Document. The idea behind this is for users to be able to submit high scores when they beat the computer along with a name. The user will then be able to view some high scores from the main menu.
+
+A 2-player mode could be implemented where both users are humans. This could be done making use of input() functions to allow users to turn away from their screen while their opponent makes their move.
+
+These features are missing as I ran out of time to implement them in working order.
 
 ### Future Features
+
+1. Intelligent Computer Decisions
+2. Varying Game Difficulties
+
+A more intricate algorithm could be implemented for the comupter to make decisions on where to strike next based on their own deployemnts board.
+
+Using this concept, varying game difficulties could be implemented where the original function would be used for the lowest difficulty, and the more intricate algorithm could be used for the higher difficulty.
 
 
 ## Testing
