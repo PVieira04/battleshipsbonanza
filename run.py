@@ -170,7 +170,8 @@ class Game:
             positions = user.calculate_available_battleship_positions(battleship.len)
             # When printing my variable 'positions', I could use a function to return a string - better readability.
             print(f" The {battleship.name} is a battleship that takes up {battleship.len} cells.")
-            print(f" The {battleship.name}'s position can start from the following cells: {positions}.")
+            print(f" The {battleship.name}'s position can start from the following cells:")
+            Player.print_available_positions(positions)
             while True:
                 print("")
                 user_input = input(f" Type the name of the cell you would like your {battleship.name} to start at: ")
@@ -601,6 +602,23 @@ class Player:
             elif direction == 'u':
                 self.board[j - count][i] = char
         return
+    
+    def print_available_positions(locations):
+        terminal_width = 80
+        print(" ", end="")
+        line_width = 1
+
+        for cell in locations:
+            print(cell, end="")
+            current_width = line_width + len(cell) + 2
+            if current_width >= terminal_width:
+                print("")
+                print(" ", end="")
+                line_width = 1
+                continue
+            print(", ", end="")
+            line_width += len(cell) + 2
+        print("")
 
     def print_board(self):
         print("")
