@@ -287,7 +287,17 @@ Using this concept, varying game difficulties could be implemented where the ori
 ## Testing
 
 1. Manual Testing
-2. PEP8 Linter
+2. User Testing
+3. PEP8 Linter
+
+Manual testing was done throughout the process of development. Every implemented feature works as intended. Because of the number of permutations the battleships can take, especially on the larger sized boards, manual testing was not exhaustive, but rather, focused on basic functionality.
+
+For example, implementing the function which turns my two letter string containing the cell name into a coordinate referring to its position in the nested list... This was tested by entering different inputs. As the inputs get validated before calling that function, there was no need include that functionality in the function and instead focus on only calling it on processed data. As a result, no errors were thrown.
+
+User testing was done with 3 human testers not including myself. Thye each followed instructions carefully, however one player did make the mistake of selecting a cell they had already done. They did this a couple of times and as a result lost to the computer. This is an intended design choice because it should be down to the skill of the player to read and understand the game board.
+
+A PEP8 Linter from Code Institute was used in order to check for good Python coding practices. This ensured there was no trailing whitespace, ambiguous intendations or lines over 79 characters long.
+
 
 ## Deployment
 
