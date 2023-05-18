@@ -274,6 +274,8 @@ A 2-player mode could be implemented where both users are humans. This could be 
 
 These features are missing as I ran out of time to implement them in working order.
 
+Additionally, the Battleship class has an unused attribute that I added toward sthe tail-end of developement called "compatible_boards". The intention behind this is I wanted to use this to make my code more efficient. When I created the random_battlehsip_placement function (from the Player class), I had not yest created the Battleship class so the intention was to condense my code and reuse functions. However, I ran out of time.
+
 ### Future Features
 
 1. Intelligent Computer Decisions
