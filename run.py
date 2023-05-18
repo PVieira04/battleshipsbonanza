@@ -958,8 +958,8 @@ class Player:
 
     def random_battleship_placement(self):
         """
-        Iterates through all battleships and calls functions to add
-        them to the game board.
+        Iterates through all battleships and calls functions to add each
+        of them to the game board.
 
                 Parameters:
                         None.
@@ -1001,7 +1001,7 @@ class Player:
 
     def place_random_battleship(self, battleship_locations, ship_len):
         """
-        Adds coordinates occupied by a bettleship to battleship_locations
+        Adds coordinates occupied by a battleship to battleship_locations
         and returns it.
 
                 Parameters:
