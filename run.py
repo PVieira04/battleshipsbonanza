@@ -23,7 +23,8 @@ class Game:
     ask_user_for_board_size():
         Asks the user what board size they wish to play.
     ask_user_for_random_or_manual_placement_of_battlships():
-        Asks the user whether they would like to place ships themselves or get a random assignment of battleships.
+        Asks the user whether they would like to place ships themselves
+        or get a random assignment of battleships.
     random_placement():
         Randomly assigns battleship places for user.
     manual_placement():
@@ -48,11 +49,11 @@ class Game:
 
     def welcome_to_the_game():
         """
-        Prints a welcome message to the user and waits for the user to press Enter
-        before moving onto the main menu.
+        Prints a welcome message to the user and waits for the user to press
+        Enter before moving onto the main menu.
 
                 Parameters:
-                        None.
+                        None.2
 
                 Returns:
                         Nothing.
@@ -62,23 +63,39 @@ class Game:
         print(" Developed by Patrick Vieira")
         print("\n" * 2, end="")
         print(
-            " This game of battleships is a two player game. You will be facing off against")
+            " This game of battleships is a one player game. You will be"
+            " facing off against"
+        )
         print(
-            " the computer. Both you and the computer will take turns guessing where each")
-        print(" other's battleships are located. The first player to find all of their")
+            " the computer. Both you and the computer will take turns guessing"
+            " where each"
+        )
+        print(
+            " other's battleships are located. The first player to find all of"
+            " their"
+        )
         print(" opponent's battleships is the winner.")
         print("")
         print(
-            " During play, you will only be able to see your own game board. Once the game")
+            " During play, you will only be able to see your own game board."
+            " Once the game"
+        )
         print(" has finished, the computer's game board will be revealed.")
         print("")
         print(
-            " You will have the option of picking from different board sizes. You will also")
-        print(" have the option to place battleships on your board yourself, or you can choose")
+            " You will have the option of picking from different board sizes."
+            " You will also"
+        )
+        print(
+            " have the option to place battleships on your board yourself, or"
+            " you can choose"
+        )
         print(" to generate a random board for a quicker start.")
         print("\n" * 2, end="")
         print(
-            " Please follow the instructions given at each stage, and I hope you enjoy the")
+            " Please follow the instructions given at each stage, and I hope"
+            " you enjoy the"
+        )
         print(" game!")
         print("\n" * 2, end="")
         input(" Press the 'Enter' key to continue to the main menu. ")
@@ -90,7 +107,7 @@ class Game:
 
                 Parameters:
                         None.
-        
+
                 Returns:
                         Nothing.
         """
@@ -140,11 +157,17 @@ class Game:
         print("\n" * 9, end="")
         print(" Board Size Selection")
         print("\n" * 2, end="")
-        print(" You can now set the size of the board you wish to play. For example:")
+        print(
+            " You can now set the size of the board you wish to play. For"
+            " example:"
+        )
         print(" Entering '4' will set the board to a 4 by 4 grid...")
         print(" and entering '8' will set the board to an 8 by 8 grid.")
         print(" You can choose from any number between 4 and 9 inclusive.")
-        print(" Please consider that the size you select will determine the duration")
+        print(
+            " Please consider that the size you select will determine the"
+            " duration"
+        )
         print(" of the game.")
         while True:
             print("")
@@ -152,10 +175,15 @@ class Game:
                 size = int(input(" Board size: "))
                 if size not in range(4, 10):
                     raise ValueError(
-                        " Invalid input. Please enter a number between 4 and 9 inclusive.")
+                        " Invalid input. Please enter a number between"
+                        " 4 and 9 inclusive."
+                    )
                 return size
             except ValueError:
-                print(" Invalid input. Please enter a number between 4 and 9 inclusive.")
+                print(
+                    " Invalid input. Please enter a number between"
+                    " 4 and 9 inclusive."
+                )
 
     def ask_user_for_random_or_manual_placement_of_battlships(user, comp):
         """
@@ -172,9 +200,18 @@ class Game:
         print("\n" * 14, end="")
         print(" Battleship Placement Method")
         print("\n" * 2, end="")
-        print(" You now have the option to place battleships on the board yourself, or ask")
-        print(" the program to set a random one for you. Don't worry! Even if the computer")
-        print(" makes it up for you, your opponent doesn't know where your battleships are! :)")
+        print(
+            " You now have the option to place battleships on the board"
+            " yourself, or ask"
+        )
+        print(
+            " the program to set a random one for you. Don't worry! Even"
+            " if the computer"
+        )
+        print(
+            " makes it up for you, your opponent doesn't know where your"
+            " battleships are! :)"
+        )
         while True:
             print("")
             string = input(" Type 'r' for random or 'm' for manual: ")
@@ -189,7 +226,7 @@ class Game:
         """
         Calls the functions which sets the computer game board,
         and gives a message to the user to inform them of changes.
-        
+
                 Parameters:
                         user (obj): instance of the Person Class
                         comp (obj): instance of the Person Class
@@ -218,13 +255,28 @@ class Game:
         print("\n" * 8, end="")
         print(" Placing battleships manually.")
         print("")
-        print(" You will now be asked to enter the name of the cell where you would like one")
-        print(" end of the battleship to start at. Then, depending on the possible")
-        print(" orientations from that position, you will be asked to enter further")
+        print(
+            " You will now be asked to enter the name of the cell where you"
+            " would like one"
+        )
+        print(
+            " end of the battleship to start at. Then, depending on the"
+            " possible"
+        )
+        print(
+            " orientations from that position, you will be asked to enter"
+            " further"
+        )
         print(" information.")
         print("")
-        print(" For example: if the battleship could be placed horizontally or vertically,")
-        print(" you must specify this. If the battleship could be placed horizontally,")
+        print(
+            " For example: if the battleship could be placed horizontally"
+            " or vertically,"
+        )
+        print(
+            " you must specify this. If the battleship could be placed"
+            " horizontally,"
+        )
         print(" facing left or right, you must also specify this.")
         print("")
         print(" The game will ask you to specify if needed.")
@@ -234,7 +286,8 @@ class Game:
 
     def manual_placement(user, comp):
         """
-        Allows the user to enter the cells they wish to populate with battleships.
+        Allows the user to enter the cells they wish to populate with
+        battleships.
 
                 Parameters:
                         user (obj): instance of the Person Class
@@ -246,28 +299,39 @@ class Game:
         battleship_instances = Battleship.get_all_instances()
         for battleship in battleship_instances:
             # Check if battleship can be placed on board
-            if not user.battleship_can_be_placed_on_board(battleship.len, battleship.version):
+            if not user.battleship_can_be_placed_on_board(
+                battleship.len, battleship.version
+            ):
                 continue
             print("")
             print("\n" * (11 - user.board_size), end="")
             user.print_board()
             print("")
-            # Variable 'positions' is a list of cell names, e.g. ["A1", "B1", ...] etc.
+            # Variable 'positions' is a list of cell names,
+            # e.g. ["A1", "B1", ...] etc.
             positions = user.calculate_available_battleship_positions(
                 battleship.len)
-            # When printing my variable 'positions', I could use a function to return a string - better readability.
+            # When printing my variable 'positions', I could use a function
+            # to return a string - better readability.
             print(
-                f" Now, it's your turn to strategically position The {battleship.name} battleship.")
+                f" Now, it's your turn to strategically position The"
+                f" {battleship.name} battleship."
+            )
             print(
-                f" This is a battleship that takes up {battleship.len} cells.")
+                f" This is a battleship that takes up {battleship.len} cells."
+            )
             print("")
             print(
-                f" The {battleship.name}'s position can start from the following cells:")
+                f" The {battleship.name}'s position can start from the"
+                f" following cells:"
+            )
             Player.print_available_positions(positions)
             while True:
                 print("")
                 user_input = input(
-                    f" Type the name of the cell you would like your {battleship.name} to start at: ")
+                    f" Type the name of the cell you would like your"
+                    f" {battleship.name} to start at: "
+                )
                 # If input is not in available cells: continue
                 if user_input not in positions:
                     print(" Invalid input, please try again.")
@@ -277,10 +341,14 @@ class Game:
             # Check if battleship can be placed horizontal and / or vertical
             i, j = Player.convert_cell_name_to_coordinate(user_input)
             # pdb.set_trace()
-            if user.battleship_can_be_placed_horizontally(i, j, battleship.len) and user.battleship_can_be_placed_vertically(i, j, battleship.len):
+            if user.battleship_can_be_placed_horizontally(i, j, battleship.len) and user.battleship_can_be_placed_vertically(i, j, battleship.len):  # noqa
                 print(
-                    f" This {battleship.name} can be placed horizontally or vertically from {user_input}.")
-                print(" Would you like to place it horizontally or vertically?")
+                    f" This {battleship.name} can be placed horizontally"
+                    f" or vertically from {user_input}."
+                )
+                print(
+                    " Would you like to place it horizontally or vertically?"
+                )
                 while True:
                     print("")
                     orientation = input(
@@ -293,120 +361,173 @@ class Game:
                 if orientation == 'h':
                     # Place it horizontally
                     print(" Placing Horizontally")
-                    if user.battleship_can_be_placed_facing_right(i, j, battleship.len) and user.battleship_can_be_placed_facing_left(i, j, battleship.len):
+                    if user.battleship_can_be_placed_facing_right(i, j, battleship.len) and user.battleship_can_be_placed_facing_left(i, j, battleship.len):  # noqa
                         print(
-                            f" This {battleship.name} can be placed facing left or right from {user_input}.")
+                            f" This {battleship.name} can be placed facing"
+                            f" left or right from {user_input}."
+                        )
                         while True:
                             print("")
                             direction = input(
-                                f" Type 'l' to face the {battleship.name} left or 'r' to face it right: ")
+                                f" Type 'l' to face the {battleship.name}"
+                                f" left or 'r' to face it right: ")
                             if direction not in ['l', 'r']:
                                 print(" Invalid input. Please try again.")
                                 continue
                             user.manual_battleship_placement(
-                                user_input, direction, battleship.char, battleship.len)
+                                user_input, direction,
+                                battleship.char, battleship.len
+                            )
                             break
-                    elif user.battleship_can_be_placed_facing_right(i, j, battleship.len):
+                    elif user.battleship_can_be_placed_facing_right(i, j, battleship.len):  # noqa
                         direction = 'r'
                         print(
-                            f" This {battleship.name} will now be placed facing right from {user_input}.")
+                            f" This {battleship.name} will now be placed"
+                            f" facing right from {user_input}."
+                        )
                         user.manual_battleship_placement(
-                            user_input, direction, battleship.char, battleship.len)
+                            user_input, direction,
+                            battleship.char, battleship.len
+                        )
                     else:
                         direction = 'l'
                         print(
-                            f" This {battleship.name} will now be placed facing left from {user_input}.")
+                            f" This {battleship.name} will now be placed"
+                            f" facing left from {user_input}."
+                        )
                         user.manual_battleship_placement(
-                            user_input, direction, battleship.char, battleship.len)
+                            user_input, direction,
+                            battleship.char, battleship.len
+                        )
                 elif orientation == 'v':
                     # Place it vertically
                     print(" Placing Vertically")
-                    if user.battleship_can_be_placed_facing_down(i, j, battleship.len) and user.battleship_can_be_placed_facing_up(i, j, battleship.len):
+                    if user.battleship_can_be_placed_facing_down(i, j, battleship.len) and user.battleship_can_be_placed_facing_up(i, j, battleship.len):  # noqa
                         print(
-                            f" This {battleship.name} can be placed facing down or up from {user_input}.")
+                            f" This {battleship.name} can be placed facing"
+                            f" down or up from {user_input}."
+                        )
                         while True:
                             print("")
                             direction = input(
-                                f" Type 'd' to face it downwards or 'u' for upwards: ")
+                                " Type 'd' to face it downwards"
+                                " or 'u' for upwards: "
+                            )
                             if direction not in ['d', 'u']:
                                 print(" Invalid input. Please try again.")
                                 continue
                             user.manual_battleship_placement(
-                                user_input, direction, battleship.char, battleship.len)
+                                user_input, direction,
+                                battleship.char, battleship.len
+                            )
                             break
-                    elif user.battleship_can_be_placed_facing_down(i, j, battleship.len):
+                    elif user.battleship_can_be_placed_facing_down(i, j, battleship.len):  # noqa
                         direction = 'd'
                         print(
-                            f" This {battleship.name} will now be placed facing down from {user_input}.")
+                            f" This {battleship.name} will now be placed"
+                            f" facing down from {user_input}."
+                        )
                         user.manual_battleship_placement(
-                            user_input, direction, battleship.char, battleship.len)
+                            user_input, direction,
+                            battleship.char, battleship.len
+                        )
                     else:
                         direction = 'u'
                         print(
-                            f" This {battleship.name} will now be placed facing up from {user_input}.")
+                            f" This {battleship.name} will now be placed"
+                            f" facing up from {user_input}."
+                        )
                         user.manual_battleship_placement(
-                            user_input, direction, battleship.char, battleship.len)
-            elif user.battleship_can_be_placed_horizontally(i, j, battleship.len):
+                            user_input, direction,
+                            battleship.char, battleship.len
+                        )
+            elif user.battleship_can_be_placed_horizontally(i, j, battleship.len):  # noqa
                 # Check if battleship can be placed facing right and left
-                if user.battleship_can_be_placed_facing_right(i, j, battleship.len) and user.battleship_can_be_placed_facing_left(i, j, battleship.len):
+                if user.battleship_can_be_placed_facing_right(i, j, battleship.len) and user.battleship_can_be_placed_facing_left(i, j, battleship.len):  # noqa
                     print(
-                        f" This {battleship.name} can be placed facing left or right from {user_input}.")
+                        f" This {battleship.name} can be placed facing"
+                        f" left or right from {user_input}."
+                    )
                     while True:
                         print("")
                         direction = input(
-                            f" Type 'l' to face it left or 'r' to face it right: ")
+                            " Type 'l' to face it left or 'r' to"
+                            " face it right: "
+                        )
                         if direction not in ['l', 'r']:
                             continue
                         user.manual_battleship_placement(
-                            user_input, direction, battleship.char, battleship.len)
+                            user_input, direction,
+                            battleship.char, battleship.len
+                        )
                         break
-                elif user.battleship_can_be_placed_facing_right(i, j, battleship.len):
+                elif user.battleship_can_be_placed_facing_right(i, j, battleship.len):  # noqa
                     direction = 'r'
                     print(
-                        f" This {battleship.name} will now be placed facing right from {user_input}.")
+                        f" This {battleship.name} will now be placed facing"
+                        f" right from {user_input}.")
                     user.manual_battleship_placement(
-                        user_input, direction, battleship.char, battleship.len)
+                        user_input, direction,
+                        battleship.char, battleship.len
+                    )
                 else:
                     direction = 'l'
                     print(
-                        f" This {battleship.name} will now be placed facing left from {user_input}.")
+                        f" This {battleship.name} will now be placed facing"
+                        f" left from {user_input}."
+                    )
                     user.manual_battleship_placement(
-                        user_input, direction, battleship.char, battleship.len)
+                        user_input, direction,
+                        battleship.char, battleship.len
+                    )
                 print("")
             else:
                 # Battleship must be able to be placed vertically.
                 # Check if battleship can be placed facing up or down
                 print(" Placing Vertically")
-                if user.battleship_can_be_placed_facing_down(i, j, battleship.len) and user.battleship_can_be_placed_facing_up(i, j, battleship.len):
+                if user.battleship_can_be_placed_facing_down(i, j, battleship.len) and user.battleship_can_be_placed_facing_up(i, j, battleship.len):  # noqa
                     print(
-                        f" This {battleship.name} can be placed facing down or up from {user_input}.")
+                        f" This {battleship.name} can be placed facing"
+                        f" down or up from {user_input}.")
                     while True:
                         print("")
                         direction = input(
-                            f" Type 'd' to face it downwards or 'u' for upwards: ")
+                            " Type 'd' to face it downwards or"
+                            " 'u' for upwards: "
+                        )
                         if direction not in ['d', 'u']:
                             print(" Invalid input. Please try again.")
                             continue
                         user.manual_battleship_placement(
-                            user_input, direction, battleship.char, battleship.len)
+                            user_input, direction,
+                            battleship.char, battleship.len
+                        )
                         break
-                elif user.battleship_can_be_placed_facing_down(i, j, battleship.len):
+                elif user.battleship_can_be_placed_facing_down(i, j, battleship.len):  # noqa
                     direction = 'd'
                     print(
-                        f" This {battleship.name} will now be placed facing down from {user_input}.")
+                        f" This {battleship.name} will now be placed facing"
+                        f" down from {user_input}."
+                    )
                     user.manual_battleship_placement(
-                        user_input, direction, battleship.char, battleship.len)
+                        user_input, direction,
+                        battleship.char, battleship.len
+                    )
                 else:
                     direction = 'u'
                     print(
-                        f" This {battleship.name} will now be placed facing up from {user_input}.")
+                        f" This {battleship.name} will now be placed facing"
+                        f" up from {user_input}."
+                    )
                     user.manual_battleship_placement(
-                        user_input, direction, battleship.char, battleship.len)
+                        user_input, direction,
+                        battleship.char, battleship.len
+                    )
         Game.set_computer_game_board(user, comp)
 
     def set_computer_game_board(user, comp):
         """
-        Calls the random battleship placement function from comp and 
+        Calls the random battleship placement function from comp and
         prepares the user for the next stage through print statements.
 
                 Parameters:
@@ -422,7 +543,10 @@ class Game:
         print("")
         print(" All game boards have been generated.")
         print("")
-        print(" You and the computer will now take turns in guessing where each others'")
+        print(
+            " You and the computer will now take turns in"
+            " guessing where each others'"
+        )
         print(" battleships are located.")
         print("")
         input(" Press the 'Enter' key to continue. ")
@@ -474,7 +598,8 @@ class Game:
                         comp (obj): instance of the Person Class
 
                 Returns:
-                        stripped_bomb (str): user input with whitespace stripped
+                        stripped_bomb (str): user input with whitespace
+                            stripped
         """
         while (True):
             bomb_location = input(
@@ -504,38 +629,54 @@ class Game:
             return False
 
         if (bomb[0].isalpha() is False):
-            print(" Invalid input. The first character must be a letter ranging from A to F.")
+            print(
+                " Invalid input. The first character must be a letter"
+                " ranging from A to F."
+            )
             return False
 
-        if (ord(bomb[0].upper()) < 65 or ord(bomb[0].upper()) > 65 + len(user.board)):
-            print(" Invalid input. The first character must be a letter ranging from A to F.")
+        if (ord(bomb[0].upper()) < 65 or ord(bomb[0].upper()) > 65 + len(user.board)):  # noqa
+            print(
+                " Invalid input. The first character must be a letter"
+                " ranging from A to F."
+            )
             return False
 
         if (bomb[1].isnumeric() is False):
-            print(f' Invalid input. The second character must be a number between 1 and {len(user.board)}.')
+            print(
+                f" Invalid input. The second character must be a number"
+                f" between 1 and {len(user.board)}."
+            )
             return False
 
         if (int(bomb[1]) < 1 or int(bomb[1]) > len(user.board)):
-            print(f' Invalid input. The second character must be a number between 1 and {len(user.board)}.')
+            print(
+                f" Invalid input. The second character must be a number"
+                f" between 1 and {len(user.board)}."
+            )
             return False
 
         return True
 
     def handle_bomb_deployment(user, comp, bomb):
         """
-        Calls the update game board function and passes in the 
+        Calls the update game board function and passes in the
         coordinates of the cell defined in 'bomb'.
 
                 Parameters:
                         user (obj): instance of the Person Class
                         comp (obj): instance of the Person Class
-                        bomb (str): stripped version of the user input from previous function
+                        bomb (str): stripped version of the user input from
+                            previous function
 
                 Returns:
                         Nothing.
         """
         print("")
-        print(f" Approved. The bomb will now be deployed at {bomb[0].upper()}{bomb[1]}.")
+        print(
+            f" Approved. The bomb will now be deployed"
+            f" at {bomb[0].upper()}{bomb[1]}."
+        )
         i = ord(bomb[0].upper()) - 65
         j = int(bomb[1]) - 1
         user.update_game_board(comp, i, j)
@@ -553,7 +694,10 @@ class Game:
         """
         computer_move = comp.random_move()
         print("")
-        print(f" Computer deploying at {chr(computer_move[0]+65)}{computer_move[1] + 1}.")
+        print(
+            f" Computer deploying at"
+            f" {chr(computer_move[0]+65)}{computer_move[1] + 1}."
+        )
         comp.update_game_board(user, computer_move[0], computer_move[1])
 
     def ask_if_user_wishes_to_play_again(user, comp):
@@ -563,7 +707,8 @@ class Game:
                 Parameters:
                         user (obj): instance of the Person Class
                         comp (obj): instance of the Person Class
-                        bomb (str): stripped version of the user input from previous function
+                        bomb (str): stripped version of the user input from
+                            previous function
 
                 Returns:
                         Nothing.
@@ -626,67 +771,87 @@ class Player:
     set_board_size(size):
         Sets up the correct sized board for the player
     set_number_of_leviathan():
-        Sets up the correct number of Leviathan battleships based on board size.
+        Sets up number of Leviathan battleships based on board size.
     set_number_of_kraken():
-        Sets up the correct number of Kraken battleships based on board size.
+        Sets up number of Kraken battleships based on board size.
     set_number_of_titan():
-        Sets up the correct number of Titan battleships based on board size.
+        Sets up number of Titan battleships based on board size.
     set_number_of_ravana():
-        Sets up the correct number of Ravana battleships based on board size.
+        Sets up number of Ravana battleships based on board size.
     set_number_of_zurvan():
-        Sets up the correct number of Zurvan battleships based on board size.
+        Sets up number of Zurvan battleships based on board size.
     set_number_of_sephirot():
-        Sets up the correct number of Sephirot battleships based on board size.
+        Sets up number of Sephirot battleships based on board size.
     random_battleship_placement():
-        Iterates through all battleships and calls functions to add them to the game board.
+        Iterates through all battleships and calls functions to add them to the
+        game board.
     place_random_battleship(battleship_locations, ship_len):
-        Adds coordinates occupied by a bettleship to battleship_locations and returns it.
+        Adds coordinates occupied by a bettleship to battleship_locations
+        and returns it.
     add_locations_to_game_board(battleship_locations, ship_len):
-        Iterates through all game board elements and adds the correct battleship characterto represent it.
+        Iterates through all game board elements and adds the correct
+        battleship characterto represent it.
     print_battleship_character(ship_len):
         Returns the battleship character based on the ship length.
     calculate_available_battleship_positions(self, ship_len):
-        Iterates through the game board and returns a list of all cells the battleship can start from.
+        Iterates through the game board and returns a list of all cells the
+        battleship can start from.
     other_battleships_to_the_right(self, i, j, ship_len):
-        Calculates whether there are other battleships to the right of a position on the board.
+        Calculates whether there are other battleships to the right of a
+        position on the board.
     other_battleships_to_the_left(self, i, j, ship_len):
-        Calculates whether there are other battleships to the left of a position on the board.
+        Calculates whether there are other battleships to the left of a
+        position on the board.
     other_battleships_downwards(self, i, j, ship_len):
-        Calculates whether there are other battleships downwards of a position on the board.
+        Calculates whether there are other battleships downwards of a position
+        on the board.
     other_battleships_upwards=(self, i, j, ship_len):
-        Calculates whether there are other battleships upwards of a position on the board.
+        Calculates whether there are other battleships upwards of a position
+        on the board.
     battleship_can_be_placed_horizontally(self, i, j, ship_len):
         Calculates whether a bettleship can be placed horizontally or not.
     battleship_can_be_placed_vertically(self, i, j, ship_len):
         Calculates whether a bettleship can be placed vertically or not.
     battleship_can_be_placed_facing_right(self, i, j, ship_len):
-        Calculates whether a bettleship can be placed facing right from its current position.
+        Calculates whether a bettleship can be placed facing right from its
+        current position.
     battleship_can_be_placed_facing_left(self, i, j, ship_len):
-        Calculates whether a bettleship can be placed facing left from its current position.
+        Calculates whether a bettleship can be placed facing left from its
+        current position.
     battleship_can_be_placed_facing_down(self, i, j, ship_len):
-        Calculates whether a bettleship can be placed facing down from its current position.
+        Calculates whether a bettleship can be placed facing down from its
+        current position.
     battleship_can_be_placed_facing_up(self, i, j, ship_len):
-        Calculates whether a bettleship can be placed facing up from its current position.
+        Calculates whether a bettleship can be placed facing up from its
+        current position.
     convert_coordinate_to_cell_name(i, j):
         Converts the coordinates of a cell to its cell name.
     convert_cell_name_to_coordinate(cell):
         Converts a position's cell name to its coordinates.
     battleship_can_be_placed_on_board(self, length, version):
-        Calculates whether the battleship in question should be placed on the board of the given size.
+        Calculates whether the battleship in question should be placed on
+        the board of the given size.
     manual_battleship_placement(self, cell, direction, char, length):
-        Replaces the elements on the game board with the character for the correct battleship.
+        Replaces the elements on the game board with the character for the
+        correct battleship.
     print_available_positions(locations):
-        Displays the avilable starting positions of the battleship in question in a clear and easily visible manner.
+        Displays the avilable starting positions of the battleship in
+        question in a clear and easily visible manner.
     print_board(self):
-        Display's a Player's board and deployments to the terminal side by side.
+        Display's a Player's board and deployments to the terminal side by
+        side.
     print_column_headers(self):
-        Returns a string containing the column headers based on the size of the board.
+        Returns a string containing the column headers based on the size of
+        the board.
     update_game_board(self, other, i, j):
-        Updates the opponent's game board and user's deployments depending on given coordinates.
+        Updates the opponent's game board and user's deployments depending
+        on given coordinates.
     random_move(self):
-        Returns the coordinates of the computer's next attacking location that it hasn't previously targeted.
+        Returns the coordinates of the computer's next attacking location
+        that it hasn't previously targeted.
     check_win_condition(self, other):
-        Checks to see whether any battleship characters are left on the opponent's board.
+        Checks to see whether any battleship characters are left on the
+        opponent's board.
     """
     leviathan_len = 7
     kraken_len = 6
@@ -710,10 +875,10 @@ class Player:
     def set_board_size(self, size):
         """
         Sets up the correct sized board for the player
-        
+
                 Parameters:
                         None.
-                
+
                 Return:
                         a nested List with each element containing a space.
         """
@@ -721,11 +886,11 @@ class Player:
 
     def set_number_of_leviathan(self):
         """
-        Sets up the correct number of Leviathan battleships based on board size.
-        
+        Sets up number of Leviathan battleships based on board size.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         int
         """
@@ -733,11 +898,11 @@ class Player:
 
     def set_number_of_kraken(self):
         """
-        Sets up the correct number of Kraken battleships based on board size.
-        
+        Sets up number of Kraken battleships based on board size.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         int
         """
@@ -745,11 +910,11 @@ class Player:
 
     def set_number_of_titan(self):
         """
-        Sets up the correct number of Titan battleships based on board size.
-        
+        Sets up number of Titan battleships based on board size.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         int
         """
@@ -757,11 +922,11 @@ class Player:
 
     def set_number_of_ravana(self):
         """
-        Sets up the correct number of Ravana battleships based on board size.
-        
+        Sets up number of Ravana battleships based on board size.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         int
         """
@@ -769,11 +934,11 @@ class Player:
 
     def set_number_of_zurvan(self):
         """
-        Sets up the correct number of Zurvan battleships based on board size.
-        
+        Sets up number of Zurvan battleships based on board size.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         int
         """
@@ -781,11 +946,11 @@ class Player:
 
     def set_number_of_sephirot(self):
         """
-        Sets up the correct number of Sephirot battleships based on board size.
-        
+        Sets up number of Sephirot battleships based on board size.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         int
         """
@@ -795,10 +960,10 @@ class Player:
         """
         Iterates through all battleships and calls functions to add
         them to the game board.
-        
+
                 Parameters:
                         None.
-                
+
                 Return:
                         Nothing.
         """
@@ -838,18 +1003,21 @@ class Player:
         """
         Adds coordinates occupied by a bettleship to battleship_locations
         and returns it.
-        
+
                 Parameters:
-                        battleship_locations (List) : list of coordinates occupied by battleships
-                        ship_len (int) : length of the ship being added to the board
-                
+                        battleship_locations (List) : list of coordinates
+                            occupied by battleships
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
-                        battleship_locations (List) : list of coordinates occupied by battleships
+                        battleship_locations (List) : list of coordinates
+                            occupied by battleships
         """
         while True:
             i = random.randint(0, self.board_size - 1)
             j = random.randint(0, self.board_size - 1)
-            if (i > self.board_size - ship_len and j > self.board_size - ship_len):
+            if (i > self.board_size - ship_len and j > self.board_size - ship_len):  # noqa
                 continue
             location_already_exists = False
             vertical = random.randint(0, 1)
@@ -877,26 +1045,29 @@ class Player:
         """
         Iterates through all game board elements and adds the correct
         battleship character to represent it.
-        
+
                 Parameters:
-                        battleship_locations (List) : list of coordinates occupied by battleships
-                        ship_len (int) : length of the ship being added to the board
-                
+                        battleship_locations (List) : list of coordinates
+                            occupied by battleships
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         Nothing.
         """
         for j, sub_array in enumerate(self.board):
             for i, element in enumerate(sub_array):
                 if ([i, j] in battleship_locations):
-                    self.board[j][i] = Player.print_battleship_character(ship_len)
+                    self.board[j][i] = Player.print_battleship_character(ship_len)  # noqa
 
     def print_battleship_character(ship_len):
         """
         Returns the battleship character based on the ship length.
-        
+
                 Parameters:
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         str of length 1.
         """
@@ -916,14 +1087,17 @@ class Player:
         """
         Iterates through the game board and returns a list of
         all cells the battleship can start from.
-        
+
                 Parameters:
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
-                        available_positions (List) : a list containing cell names of abilable positions.
+                        available_positions (List) : a list containing cell
+                            names of abilable positions.
         """
-        # In this method, I want to be able to calculate all available positions for any battleship.
+        # In this method, I want to be able to calculate all available
+        # positions for any battleship.
         # Define an empty list
         available_positions = []
         # Iterate through user.board
@@ -931,33 +1105,49 @@ class Player:
             for i, element in enumerate(sub_array):
                 # If a cell is empty...
                 if element == " ":
-                    # Run a check to see if ship of a certain length can be placed there.
-                    # Run the check both horizontally and vertically, and in both directions.
-                    # Run a further check to see if another ship is blocking our path.
-                    # If the area is free, add the cell name to the available_positions list.
-                    if not self.other_battleships_to_the_right(i, j, ship_len):
+                    # Run a check to see if ship of a certain length can be
+                    # placed there. Run the check both horizontally and
+                    # vertically, and in both directions. Run a further
+                    # check to see if another ship is blocking our path.
+                    # If the area is free, add the cell name to the
+                    # available_positions list.
+                    if not self.other_battleships_to_the_right(
+                        i, j, ship_len
+                    ):
                         available_positions.append(
-                            Player.convert_coordinate_to_cell_name(i, j))
-                    elif not self.other_battleships_to_the_left(i, j, ship_len):
+                            Player.convert_coordinate_to_cell_name(i, j)
+                        )
+                    elif not self.other_battleships_to_the_left(
+                        i, j, ship_len
+                    ):
                         available_positions.append(
-                            Player.convert_coordinate_to_cell_name(i, j))
-                    elif not self.other_battleships_downwards(i, j, ship_len):
+                            Player.convert_coordinate_to_cell_name(i, j)
+                        )
+                    elif not self.other_battleships_downwards(
+                        i, j, ship_len
+                    ):
                         available_positions.append(
-                            Player.convert_coordinate_to_cell_name(i, j))
-                    elif not self.other_battleships_upwards(i, j, ship_len):
+                            Player.convert_coordinate_to_cell_name(i, j)
+                        )
+                    elif not self.other_battleships_upwards(
+                        i, j, ship_len
+                    ):
                         available_positions.append(
-                            Player.convert_coordinate_to_cell_name(i, j))
+                            Player.convert_coordinate_to_cell_name(i, j)
+                        )
         return available_positions
 
     def other_battleships_to_the_right(self, i, j, ship_len):
         """
-        Calculates whether there are other battleships to the right of a position on the board.
-        
+        Calculates whether there are other battleships to the right of a
+        position on the board.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -970,13 +1160,15 @@ class Player:
 
     def other_battleships_to_the_left(self, i, j, ship_len):
         """
-        Calculates whether there are other battleships to the left of a position on the board.
-        
+        Calculates whether there are other battleships to the left of a
+        position on the board.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -989,13 +1181,15 @@ class Player:
 
     def other_battleships_downwards(self, i, j, ship_len):
         """
-        Calculates whether there are other battleships downwards of a position on the board.
-        
+        Calculates whether there are other battleships downwards of a
+        position on the board.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -1008,13 +1202,15 @@ class Player:
 
     def other_battleships_upwards(self, i, j, ship_len):
         """
-        Calculates whether there are other battleships upwards of a position on the board.
-        
+        Calculates whether there are other battleships upwards of a
+        position on the board.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -1028,40 +1224,44 @@ class Player:
     def battleship_can_be_placed_horizontally(self, i, j, ship_len):
         """
         Calculates whether a bettleship can be placed horizontally or not.
-        
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
-        return not (self.other_battleships_to_the_right(i, j, ship_len) and self.other_battleships_to_the_left(i, j, ship_len))
+        return not (self.other_battleships_to_the_right(i, j, ship_len) and self.other_battleships_to_the_left(i, j, ship_len))  # noqa
 
     def battleship_can_be_placed_vertically(self, i, j, ship_len):
         """
         Calculates whether a bettleship can be placed vertically or not.
-        
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added
+                            to the board
+
                 Return:
                         True or False
         """
-        return not (self.other_battleships_downwards(i, j, ship_len) and self.other_battleships_upwards(i, j, ship_len))
+        return not (self.other_battleships_downwards(i, j, ship_len) and self.other_battleships_upwards(i, j, ship_len))  # noqa
 
     def battleship_can_be_placed_facing_right(self, i, j, ship_len):
         """
-        Calculates whether a bettleship can be placed facing right from its current position.
-        
+        Calculates whether a bettleship can be placed facing right from its
+        current position.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -1069,13 +1269,15 @@ class Player:
 
     def battleship_can_be_placed_facing_left(self, i, j, ship_len):
         """
-        Calculates whether a bettleship can be placed facing left from its current position.
-        
+        Calculates whether a bettleship can be placed facing left from its
+        current position.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -1083,13 +1285,15 @@ class Player:
 
     def battleship_can_be_placed_facing_down(self, i, j, ship_len):
         """
-        Calculates whether a bettleship can be placed facing down from its current position.
-        
+        Calculates whether a bettleship can be placed facing down from its
+        current position.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -1097,13 +1301,15 @@ class Player:
 
     def battleship_can_be_placed_facing_up(self, i, j, ship_len):
         """
-        Calculates whether a bettleship can be placed facing up from its current position.
-        
+        Calculates whether a bettleship can be placed facing up from its
+        current position.
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        ship_len (int) : length of the ship being added to
+                            the board
+
                 Return:
                         True or False
         """
@@ -1112,12 +1318,11 @@ class Player:
     def convert_coordinate_to_cell_name(i, j):
         """
         Converts the coordinates of a cell to its cell name.
-        
+
                 Parameters:
                         i (int) : x coordinate of board
                         j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+
                 Return:
                         True or False
         """
@@ -1126,12 +1331,10 @@ class Player:
     def convert_cell_name_to_coordinate(cell):
         """
         Converts a position's cell name to its coordinates.
-        
+
                 Parameters:
-                        i (int) : x coordinate of board
-                        j (int) : y coordinate of board
-                        ship_len (int) : length of the ship being added to the board
-                
+                        cell (str) : Cell name of two characters
+
                 Return:
                         True or False
         """
@@ -1139,12 +1342,15 @@ class Player:
 
     def battleship_can_be_placed_on_board(self, length, version):
         """
-        Calculates whether the battleship in question should be placed on the board of the given size.
-        
+        Calculates whether the battleship in question should be placed on the
+        board of the given size.
+
                 Parameters:
-                        length (int) : length of the ship being added to the board
-                        version (int) : version of the battleship being added to the board
-                
+                        length (int) : length of the ship being added to the
+                            board
+                        version (int) : version of the battleship being added
+                            to the board
+
                 Return:
                         True or False
         """
@@ -1155,19 +1361,24 @@ class Player:
             or length == 4 and self.board_size == 9 and version == 2 \
             or length == 3 and self.board_size > 3 and version == 1 \
             or length == 3 and self.board_size == 9 and version == 2 \
-            or length == 2 and self.board_size > 3 and (version == 1 or version == 2) \
+            or length == 2 and self.board_size > 3 and version in (1, 2) \
             or length == 2 and self.board_size == 9 and version == 3
 
     def manual_battleship_placement(self, cell, direction, char, length):
         """
-        Replaces the elements on the game board with the character for the correct battleship.
-        
+        Replaces the elements on the game board with the character for the
+        correct battleship.
+
                 Parameters:
-                        cell (str) : The cell name of the battleship's starting position.
-                        direction (str) : The direction the battleship is facing.
-                        char (str) : The charater that represents the battleship being added to the board.
-                        length (int) : The length of the battleship being added to the board.
-                
+                        cell (str) : The cell name of the battleship's starting
+                            position.
+                        direction (str) : The direction the battleship is
+                            facing.
+                        char (str) : The charater that represents the
+                            battleship being added to the board.
+                        length (int) : The length of the battleship being added
+                            to the board.
+
                 Return:
                         Nothing.
         """
@@ -1184,11 +1395,13 @@ class Player:
 
     def print_available_positions(locations):
         """
-        Displays the avilable starting positions of the battleship in question in a clear and easily visible manner.
-        
+        Displays the avilable starting positions of the battleship in question
+        in a clear and easily visible manner.
+
                 Parameters:
-                        locations (List) : Contains the avilable starting positions of the battleship in question.
-                
+                        locations (List) : Contains the avilable starting
+                            positions of the battleship in question.
+
                 Return:
                         Nothing.
         """
@@ -1216,11 +1429,12 @@ class Player:
 
     def print_board(self):
         """
-        Display's a Player's board and deployments to the terminal side by side.
-        
+        Display's a Player's board and deployments to the terminal side
+        by side.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         Nothing.
         """
@@ -1229,19 +1443,22 @@ class Player:
         print(f" {self.name}'s board:      {self.name}'s deployments:")
         print("")
         print(
-            f"   {self.print_column_headers()}           {self.print_column_headers()}")
+            f"   {self.print_column_headers()}           "
+            f"{self.print_column_headers()}")
         for i, row in enumerate(self.board):
             print(
-                f" {str(i + 1)} {' '.join(row)}          {str(i + 1)} {' '.join(self.deployments[i])}")
+                f" {str(i + 1)} {' '.join(row)}          "
+                f"{str(i + 1)} {' '.join(self.deployments[i])}")
         print("")
 
     def print_column_headers(self):
         """
-        Returns a string containing the column headers based on the size of the board.
-        
+        Returns a string containing the column headers based on the size
+        of the board.
+
                 Parameters:
                         None.
-                
+
                 Return:
                         Nothing.
         """
@@ -1253,13 +1470,14 @@ class Player:
 
     def update_game_board(self, other, i, j):
         """
-        Updates the opponent's game board and user's deployments depending on given coordinates.
-        
+        Updates the opponent's game board and user's deployments depending
+        on given coordinates.
+
                 Parameters:
                         other (obj) : The object of the opponent.
                         i (int) : The x coordinate of the chosen location
                         j (int) : The y coordinate of the chosen location
-                
+
                 Return:
                         Nothing.
         """
@@ -1278,13 +1496,16 @@ class Player:
 
     def random_move(self):
         """
-        Returns the coordinates of the computer's next attacking location that it hasn't previously targeted.
-        
+        Returns the coordinates of the computer's next attacking location that
+        it hasn't previously targeted.
+
                 Parameters:
                         None.
-                
+
                 Return:
-                        computer_move (List) : A list containing the coordinates of the computer's chosen location to attack.
+                        computer_move (List) : A list containing the
+                            coordinates of the computer's chosen location
+                            to attack.
         """
         while True:
             i = random.randint(0, len(self.board) - 1)
@@ -1296,15 +1517,16 @@ class Player:
 
     def check_win_condition(self, other):
         """
-        Checks to see whether any battleship characters are left on the opponent's board.
-        
+        Checks to see whether any battleship characters are left on the
+        opponent's board.
+
                 Parameters:
                         other (obj) : The object of the opponent.
-                
+
                 Return:
                         True or False
         """
-        if any(char in ['L', 'K', 'T', 'R', 'Z', 'S'] for sublist in other.board for char in sublist):
+        if any(char in ['L', 'K', 'T', 'R', 'Z', 'S'] for sublist in other.board for char in sublist):  # noqa
             return False
         self.print_board()
         other.print_board()
@@ -1330,19 +1552,21 @@ class Battleship:
     version : int
         what instance of the same battleship is it
     compatible_boards : List
-        list of integers representing what board sizes that battleship can be placed on
-    
+        list of integers representing what board sizes that battleship can be
+        placed on
+
     Methods
     -------
     get_all_instances():
-        Returns the all_instances class variable containing all instanced objects.
+        Returns the all_instances class variable containing all instanced
+        objects.
     """
     all_instances = []
 
     def __init__(self, name, length, char, version, compatible_boards):
         """
         Constructs all the necessary attributes for the Battleship object.
-        
+
         Parameters
         ----------
             name : str
@@ -1354,7 +1578,8 @@ class Battleship:
             version : int
                 what instance of the same battleship is it
             compatible_boards : List
-                list of integers representing what board sizes that battleship can be placed on
+                list of integers representing what board sizes that battleship
+                can be placed on
         """
         self.name = name
         self.len = length
@@ -1365,12 +1590,13 @@ class Battleship:
 
     def get_all_instances():
         """
-        Returns the all_instances class variable containing all instanced objects.
-        
+        Returns the all_instances class variable containing all instanced
+        objects.
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
             all_instances : List
