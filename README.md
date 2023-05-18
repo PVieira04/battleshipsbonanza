@@ -325,3 +325,7 @@ The deployment process was as follows:
 Once deployment is complete, the provided link will allow anyone to visit the deployed project.
 
 ## Credits
+
+Thank you to Code Institute for providing the template used for this project and for also providing the [linter](https://pep8ci.herokuapp.com/#) used to test it.
+
+Thank you to 'Geeks for Geeks' for their [article on nested list comprehensions](https://www.geeksforgeeks.org/nested-list-comprehensions-in-python/) which helped me condense my code. 
