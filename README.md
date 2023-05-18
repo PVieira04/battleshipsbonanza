@@ -24,19 +24,17 @@ Developed by Patrick Vieira
   * [Languages](#languages)
 * [Design](#design)
   * [UX Considerations](#ux-considerations)
-  * [Wireframes](#wireframes)
 * [Features](#features)
   * [Welcome Message](#welcome-message)
   * [Main Menu](#main-menu)
-  * [Play Game](#play-game)
   * [Board Size Selection](#board-size-selection)
   * [Battleship Assignment Method](#battleship-assignment-method)
   * [Random Assignment](#random-assignment)
   * [Manual Assignment](#manual-assignment)
   * [Main Game Loop](#main-game-loop)
-  * [Check Win Condition](#check-win-condition)
   * [Game Over](#game-over)
-  * [Play Again](#play-again)
+  * [Exit](#exit)
+  * [Features to be Added](#features-to-be-added)
   * [Future Features](#future-features)
 * [Testing](#testing)
 * [Deployment](#deployment)
@@ -176,7 +174,9 @@ However, the only code I have written is in Python, located in run.py of the roo
 
 ### UX Considerations
 
-### wireframes
+At certain points during the game, the user is presented with a lot of information all at once. In order to space this out for the user to be able to take everything in, I have implemented several points where the user needs to press the enter key to continue to the next section.
+
+I have also implemented very large spacings between sections so that it is clear to the user what part is new. An ideal situation would have been to change to code so that every print message has a slight delay, allowing the user to see the progression of text. However, this would have made my code very messy and I think the large spacings are a good alternative.
 
 
 ## Features
